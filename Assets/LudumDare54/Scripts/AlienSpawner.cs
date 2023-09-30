@@ -5,45 +5,44 @@ using UnityEngine;
 
 public class AlienSpawner : MonoBehaviour
 {
-    public static AlienSpawner instance;
+  public static AlienSpawner instance;
 
-    public float baseSpawnRate = 10f;
+  public float baseSpawnRate = 10f;
 
-    public float randomAmount = 0.5f;
+  public float randomAmount = 0.5f;
 
-    public GameObject alienPrefab;
+  public GameObject alienPrefab;
 
-    public Transform spawnPoint;
+  public Transform spawnPoint;
 
 
-    private float nextSpawnTime = 0f;
+  private float nextSpawnTime = 0f;
 
-    void Awake()
+  void Awake()
+  {
+    instance = this;
+  }
+
+  private void Update()
+  {
+    if (Time.time > nextSpawnTime)
     {
-        instance = this;
+      SpawnAlien();
+      nextSpawnTime = Time.time + NextSpawnSecs();
     }
+  }
 
-    private void Update()
-    {
-        if (Time.time > nextSpawnTime)
-        {
-            SpawnAlien();
-            nextSpawnTime = Time.time + NextSpawnSecs();
-        }
-    }
+  private float NextSpawnSecs()
+  {
+    var reductionAmount = (StarManager.instance.Stars + 10) / 10;
+    var spawnRate = baseSpawnRate / reductionAmount;
 
-    private float NextSpawnSecs()
-    {
-        var reductionAmount = (StarManager.instance.stars + 10) / 10;
-        var spawnRate = baseSpawnRate / reductionAmount;
+    var allo = spawnRate + UnityEngine.Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
+    return allo;
+  }
 
-        var allo = spawnRate + UnityEngine.Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
-        Debug.Log(allo);
-        return allo;
-    }
-
-    public void SpawnAlien()
-    {
-        Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
-    }
+  public void SpawnAlien()
+  {
+    Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
+  }
 }
