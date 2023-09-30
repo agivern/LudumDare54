@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
@@ -9,17 +10,20 @@ public class Alien : MonoBehaviour
 {
     public Room room { get; private set; }
     private int roomStayDuration;
-    private int happiness = 100;
+    private float happiness = 100;
 
     private float timer = 1f;
 
     public AlienRace race = AlienRace.Green;
 
+    private List<Desire> desires = new List<Desire>();
+    
+    
 
     void Start()
     {
         SetRandomRoomStayDuration();
-        // Set random list of "Wants" "Doesn't want"
+        desires = DesireGenerator.GenerateDesire();
     }
 
 
@@ -56,7 +60,8 @@ public class Alien : MonoBehaviour
 
     private void UpdateHappiness()
     {
-        // TODO 
+        var statisfaction = desires.Sum(desire => desire.satisfaction(this));
+        happiness += statisfaction * Time.deltaTime;
     }
 
     private void UpdateRemainingTime()
