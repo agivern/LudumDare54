@@ -8,13 +8,11 @@ public class AlienSpawner : MonoBehaviour
   public static AlienSpawner instance;
 
   public float baseSpawnRate = 10f;
-
   public float randomAmount = 0.5f;
 
   public GameObject alienPrefab;
 
   public Transform spawnPoint;
-
 
   private float nextSpawnTime = 0f;
 
@@ -43,6 +41,7 @@ public class AlienSpawner : MonoBehaviour
 
   public void SpawnAlien()
   {
-    Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
+    var alienObj = Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
+    LineManager.instance.AddAlien(alienObj.GetComponent<Alien>());
   }
 }
