@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a89de8e8d194da9b2e68f5351621b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnRate: 2
+  baseSpawnRate: 4
   randomAmount: 0.5
   alienPrefab: {fileID: 210309495250350144, guid: 7424c9759c4504f2eb65f35d4742ccb4, type: 3}
   spawnPoint: {fileID: 739306561}

@@ -22,7 +22,6 @@ public class LineManager : MonoBehaviour
     {
         lineup.Add(alien);
         var pos = LineupPositionToWorldPosition(lineup.Count - 1);
-        Debug.Log(pos);
         alien.MoveTo(pos);
     }
 
