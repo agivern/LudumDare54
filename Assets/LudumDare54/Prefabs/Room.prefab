@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7902210438675170095}
   - component: {fileID: 8733956975086572702}
+  - component: {fileID: 4628865320920915262}
   m_Layer: 6
   m_Name: Room
   m_TagString: Room
@@ -78,6 +79,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4628865320920915262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210802898538130503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c2c8aa7fb4f49db8e3ff01d831374c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aliens: []
 --- !u!1 &7542991811099334357
 GameObject:
   m_ObjectHideFlags: 0
