@@ -17,13 +17,14 @@ public class Alien : MonoBehaviour
     public AlienRace race = AlienRace.Green;
 
     private List<Desire> desires = new List<Desire>();
-    
-    
+
+    public LikeBox likeBox;
 
     void Start()
     {
         SetRandomRoomStayDuration();
-        desires = DesireGenerator.GenerateDesire();
+        desires = new DesireGenerator().GenerateDesire();
+        likeBox.Initialize(desires);
     }
 
 
@@ -105,5 +106,10 @@ public class Alien : MonoBehaviour
     public void MoveTo(Vector2 position)
     {
         GetComponent<AlienMovement>().SetDestination(position);
+    }
+
+    public void ExpressDesires()
+    {
+        likeBox.gameObject.SetActive(true);
     }
 }

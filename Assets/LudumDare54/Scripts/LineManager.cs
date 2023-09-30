@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -23,6 +24,12 @@ public class LineManager : MonoBehaviour
         lineup.Add(alien);
         var pos = LineupPositionToWorldPosition(lineup.Count - 1);
         alien.MoveTo(pos);
+
+
+        if (lineup.Any())
+        {
+            lineup[0].ExpressDesires();
+        }
     }
 
     public void RemoveAlien(Alien alien)
@@ -31,6 +38,11 @@ public class LineManager : MonoBehaviour
         if (removed)
         {
             UpdateAllAlienPositions();
+        }
+
+        if (lineup.Any())
+        {
+            lineup[0].ExpressDesires();
         }
     }
 
