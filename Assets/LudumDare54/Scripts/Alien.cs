@@ -7,11 +7,13 @@ using Random = UnityEngine.Random;
 
 public class Alien : MonoBehaviour
 {
-    private Room room;
+    public Room room { get; private set; }
     private int roomStayDuration;
     private int happiness = 100;
 
     private float timer = 1f;
+
+    public AlienRace race = AlienRace.Green;
 
 
     void Start()
