@@ -47,7 +47,7 @@ public class Alien : MonoBehaviour
     {
         room = newRoom;
         room.AddAlien(this);
-
+        MoveTo(room.transform.position);
         // TODO move gameobject in room
     }
 
