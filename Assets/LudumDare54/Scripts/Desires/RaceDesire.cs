@@ -26,4 +26,14 @@ public class RaceDesire : Desire
     {
         return satisfactionLevel > 0;
     }
+    
+    public bool Equals(Desire other)
+    {
+        if (other is RaceDesire desire)
+        {
+            return desire.race == race;
+        }
+
+        return false;
+    }
 }

@@ -4,26 +4,41 @@ using UnityEngine;
 
 public class DesireGenerator
 {
-    public static List<Desire> GenerateDesire()
+    
+    
+    public List<Desire> GenerateDesire()
     {
-        return Enumerable.Range(0, numberOfDesires()).Select(i => createDesire()).ToList();
+        var desires = new List<Desire>();
+        var numberOfDesires = this.numberOfDesires();
+        for (var i =0; i< numberOfDesires; i++)
+        {
+            var desire = createDesire();
+            // Fix me ugly
+            if (desires.Any(d => d.Equals(desire)))
+            {
+                continue;
+            }
+            desires.Add(desire);
+        }
+
+        return desires;
     }
 
-    private static int numberOfDesires()
+    private int numberOfDesires()
     {
         return Mathf.FloorToInt(1 + (StarManager.instance.Stars / 5f));
     }
     
-    private static Desire createDesire()
+    private Desire createDesire()
     {
         // TODO add object desires
        return createRaceDesire();
     }
 
-    private static RaceDesire createRaceDesire()
+    private RaceDesire createRaceDesire()
     {
         var possibleRaces = AlienSpawner.instance.SpawnableRaces();
-        var race = possibleRaces[Random.Range(1, (possibleRaces.Count - 1))];
+        var race = possibleRaces[Random.Range(0, possibleRaces.Count)];
         var satisfactionLevel = Random.value > 0.5f ? 1 : -1;
         return new RaceDesire(race, satisfactionLevel);
     }

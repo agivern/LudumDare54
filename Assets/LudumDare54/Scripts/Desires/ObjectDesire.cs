@@ -26,4 +26,14 @@ public class ObjectDesire : Desire
     {
         return satisfactionLevel > 0;
     }
+
+    public bool Equals(Desire other)
+    {
+        if (other is ObjectDesire desire)
+        {
+            return desire.type == type;
+        }
+
+        return false;
+    }
 }
