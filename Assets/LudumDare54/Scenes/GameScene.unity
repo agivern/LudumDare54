@@ -231,7 +231,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351614936
 GameObject:
@@ -262,7 +262,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &373863487
 PrefabInstance:
@@ -517,7 +517,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777880101
 GameObject:
@@ -552,6 +552,15 @@ MonoBehaviour:
   randomAmount: 0.5
   alienPrefab: {fileID: 210309495250350144, guid: 7424c9759c4504f2eb65f35d4742ccb4, type: 3}
   spawnPoint: {fileID: 739306561}
+  alienRaceByStars:
+  - race: 0
+    starsRequired: 0
+  - race: 2
+    starsRequired: 3
+  - race: 1
+    starsRequired: 15
+  - race: 3
+    starsRequired: 30
 --- !u!4 &777880104
 Transform:
   m_ObjectHideFlags: 0
@@ -565,7 +574,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &959114429
 GameObject:
@@ -627,7 +636,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1199744866
 GameObject:
@@ -6312,7 +6321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2434790247907354563, guid: ee07e6398178d4666a7492f574d06d36, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2434790247907354563, guid: ee07e6398178d4666a7492f574d06d36, type: 3}
       propertyPath: m_AnchorMax.x

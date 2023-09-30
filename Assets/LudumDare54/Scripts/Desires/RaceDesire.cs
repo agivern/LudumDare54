@@ -21,4 +21,9 @@ public class RaceDesire : Desire
             return -1 * satisfactionLevel;
         }
     }
+    
+    public bool Likes()
+    {
+        return satisfactionLevel > 0;
+    }
 }

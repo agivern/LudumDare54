@@ -21,4 +21,9 @@ public class ObjectDesire : Desire
             return -1 * satisfactionLevel;
         }
     }
+
+    public bool Likes()
+    {
+        return satisfactionLevel > 0;
+    }
 }
