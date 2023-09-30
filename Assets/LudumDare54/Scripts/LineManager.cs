@@ -21,6 +21,11 @@ public class LineManager : MonoBehaviour
 
     public void AddAlien(Alien alien)
     {
+        if (lineup.Contains(alien))
+        {
+            return;
+        }
+        
         lineup.Add(alien);
         var pos = LineupPositionToWorldPosition(lineup.Count - 1);
         alien.MoveTo(pos);
@@ -35,11 +40,13 @@ public class LineManager : MonoBehaviour
     public void RemoveAlien(Alien alien)
     {
         var removed = lineup.Remove(alien);
+
         if (removed)
         {
             UpdateAllAlienPositions();
         }
-
+        
+        alien.CloseExpressDesires();
         if (lineup.Any())
         {
             lineup[0].ExpressDesires();

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Room
+  - Lobby
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,7 @@ TagManager:
   - UI
   - Room
   - Alien
-  - 
-  - 
+  - Lobby
   - 
   - 
   - 

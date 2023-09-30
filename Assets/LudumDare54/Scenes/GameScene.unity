@@ -894,9 +894,9 @@ GameObject:
   - component: {fileID: 1243943696}
   - component: {fileID: 1243943695}
   - component: {fileID: 1243943697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Couloir
-  m_TagString: Untagged
+  m_TagString: Lobby
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

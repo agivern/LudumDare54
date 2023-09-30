@@ -112,4 +112,31 @@ public class Alien : MonoBehaviour
     {
         likeBox.gameObject.SetActive(true);
     }
+
+    public void CloseExpressDesires()
+    {
+        likeBox.gameObject.SetActive(false);
+    }
+
+    public void MoveToLobby()
+    {
+        room?.RemoveAlien(this);
+        room = null;
+        LineManager.instance.AddAlien(this);
+    }
+
+    public void MoveToSpace()
+    {
+        room?.RemoveAlien(this);
+        room = null;
+        LineManager.instance.RemoveAlien(this);
+        GetComponent<AlienMovement>().isInSpace = true;
+        GetComponent<AlienDragDrop>().enabled = false;
+        var rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.drag = 0;
+        rb.velocity = transform.position.normalized * 0.2f;
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.angularVelocity = Random.Range(-300f, 300f);
+    }
 }

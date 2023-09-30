@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AlienMovement : MonoBehaviour
 {
-    private bool hasDestination = false;
+    public bool hasDestination = false;
+    public bool isInSpace = false;
     private Vector2 currentDestination;
 
     public float speed = 10f;
@@ -23,6 +24,11 @@ public class AlienMovement : MonoBehaviour
 
     private void MoveToDestination()
     {
+        if (isInSpace)
+        {
+            return;
+        }
+        
         if (!hasDestination)
         {
             rb.velocity = Vector2.zero;
