@@ -6,7 +6,7 @@ using UnityEngine;
 public class LineManager : MonoBehaviour
 {
     public List<Alien> lineup;
-    
+
     public float spacing = 1f;
 
     public Transform endOfLineUp;
@@ -21,20 +21,23 @@ public class LineManager : MonoBehaviour
     public void AddAlien(Alien alien)
     {
         lineup.Add(alien);
-        var pos = LineupPositionToWorldPosition(lineup.Count-1);
+        var pos = LineupPositionToWorldPosition(lineup.Count - 1);
         Debug.Log(pos);
         alien.MoveTo(pos);
     }
-    
+
     public void RemoveAlien(Alien alien)
     {
-        lineup.Remove(alien);
-        UpdateAllAlienPositions();
+        var removed = lineup.Remove(alien);
+        if (removed)
+        {
+            UpdateAllAlienPositions();
+        }
     }
 
     private void UpdateAllAlienPositions()
     {
-        for (var i =0; i < lineup.Count; i++)
+        for (var i = 0; i < lineup.Count; i++)
         {
             var alien = lineup[i];
             var pos = LineupPositionToWorldPosition(i);

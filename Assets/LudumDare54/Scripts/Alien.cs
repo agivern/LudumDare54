@@ -48,6 +48,7 @@ public class Alien : MonoBehaviour
         room = newRoom;
         room.AddAlien(this);
         MoveTo(room.transform.position);
+        LineManager.instance.RemoveAlien(this);
         // TODO move gameobject in room
     }
 
