@@ -47,7 +47,9 @@ public class AlienDragDrop : MonoBehaviour
             isDragging = false;
             CurrentlyDragging = null;
 
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero,
+            RaycastHit2D hit = Physics2D.Raycast(
+                Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f)),
+                Vector2.zero,
                 Mathf.Infinity, droppableLayersToCheck);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Room"))
             {
