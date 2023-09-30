@@ -4,6 +4,7 @@ using System.Linq;
 
 public class ToggleGameObject : MonoBehaviour
 {
+#if UNITY_EDITOR
   [MenuItem("Edit/Toggle Active State %e")]
   private static void ToggleActiveState()
   {
@@ -18,4 +19,5 @@ public class ToggleGameObject : MonoBehaviour
   {
     return Selection.gameObjects.Any();
   }
+#endif
 }

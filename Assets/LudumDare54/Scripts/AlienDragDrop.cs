@@ -7,7 +7,7 @@ public class AlienDragDrop : MonoBehaviour
   [SerializeField] private LayerMask droppableLayersToCheck;
   public static AlienDragDrop CurrentlyDragging { get; private set; }
 
-  private Vector3 initialPosition;
+
   private bool isDragging = false;
 
   private Alien alien;
@@ -30,7 +30,6 @@ public class AlienDragDrop : MonoBehaviour
         {
           isDragging = true;
           CurrentlyDragging = this;
-          initialPosition = transform.position;
         }
       }
     }
@@ -55,10 +54,7 @@ public class AlienDragDrop : MonoBehaviour
         alien.MoveToRoom(room);
         this.enabled = false;
       }
-      else
-      {
-        transform.position = initialPosition;
-      }
+
     }
   }
 }
