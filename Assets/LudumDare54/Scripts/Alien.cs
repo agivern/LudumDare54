@@ -95,6 +95,11 @@ public class Alien : MonoBehaviour
 
   private void UpdateHappiness()
   {
+    if (exiting)
+    {
+      return;
+    }
+
     var statisfaction = desires.Sum(desire => desire.satisfaction(this));
     happiness += statisfaction * Time.deltaTime;
 
@@ -133,17 +138,23 @@ public class Alien : MonoBehaviour
     exiting = true;
     var pay = 5 + Mathf.Max(0, 50 + (Mathf.RoundToInt(happiness) * 3));
     MoneyManager.instance.CustomerPay(pay);
-    Debug.Log(happiness);
 
     if (happiness >= 5)
     {
       StarManager.instance.CustomerTip();
+      GetComponent<AlienStarIndicator>().Play(1);
+      animator.SetEmotion(happiness);
     }
-
     else if (happiness <= -5)
     {
       StarManager.instance.CustomerHate();
       StarManager.instance.CustomerHate();
+      GetComponent<AlienStarIndicator>().Play(-2);
+      animator.SetEmotion(happiness);
+    }
+    else
+    {
+      animator.SetEmotion(0);
     }
 
 
@@ -152,16 +163,19 @@ public class Alien : MonoBehaviour
     room = null;
 
     GameObject exitWarp = GameObject.FindWithTag("exit_warp");
+
+
+    this.transform.position = exitWarp.transform.position;
+    MoveTo(exitWarp.transform.position);
+
+
+    Invoke("WalkToExit", 2f);
+  }
+
+  private void WalkToExit()
+  {
     GameObject exit = GameObject.FindWithTag("exit");
-    if (exitWarp != null)
-    {
-      this.transform.position = exitWarp.transform.position;
-      MoveTo(exit.transform.position);
-    }
-    else
-    {
-      GameObject.Destroy(this.gameObject);
-    }
+    MoveTo(exit.transform.position);
   }
 
   private void OnTriggerEnter2D(Collider2D other)
