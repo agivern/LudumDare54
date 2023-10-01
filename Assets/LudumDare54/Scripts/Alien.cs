@@ -66,8 +66,7 @@ public class Alien : MonoBehaviour
 
     if (room != null)
     {
-      // Leave hotel at the top of the loop to be trigger a frame after roomStayDuration update (prevent bug in happiness calcul)
-      if (roomStayDuration == 0)
+      if (roomStayDuration == 0 || happiness == -5 || happiness == 10)
       {
         LeaveHotel();
       }
@@ -101,7 +100,7 @@ public class Alien : MonoBehaviour
     }
 
     var statisfaction = desires.Sum(desire => desire.satisfaction(this));
-    happiness += statisfaction * Time.deltaTime;
+    happiness = Mathf.Clamp(happiness + statisfaction * Time.deltaTime, -5, 10);
 
     animator.SetEmotion(statisfaction);
   }
