@@ -6,7 +6,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
   [SerializeField] List<Alien> aliens = new List<Alien>();
-  [SerializeField] List<RoomObject> roomObjects = new List<RoomObject>();
+  [SerializeField] List<RoomObjectType> roomObjects = new List<RoomObjectType>();
 
   public float roomWidth = 6f;
   void Start()
@@ -18,6 +18,18 @@ public class Room : MonoBehaviour
   void Update()
   {
 
+  }
+
+  public void AddRoomObject(RoomObjectType roomObjectType)
+  {
+    if (roomObjects.Contains(roomObjectType) == false)
+    {
+      roomObjects.Add(roomObjectType);
+    }
+    else
+    {
+      Debug.LogError("Room object already in the room");
+    }
   }
 
   public void AddAlien(Alien alien)
@@ -48,9 +60,9 @@ public class Room : MonoBehaviour
   {
     return aliens.Any(alien => alien.race == race);
   }
-  
+
   public bool ContainsObject(RoomObjectType type)
   {
-    return roomObjects.Any(roomObject => roomObject.type == type);
+    return roomObjects.Any(roomObject => roomObject == type);
   }
 }

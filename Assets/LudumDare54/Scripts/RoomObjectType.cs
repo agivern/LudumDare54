@@ -1,4 +1,7 @@
 public enum RoomObjectType
 {
-    TODO
+  A,
+  B,
+  C,
+  D
 }

@@ -39,6 +39,15 @@ public class MoneyManager : MonoBehaviour
     UpdateUI();
   }
 
+  public void PurchaseItem(int value)
+  {
+    if (value > 0)
+    {
+      money = Mathf.Max(0, money - value);
+      UpdateUI();
+    }
+  }
+
   private void DeductCost()
   {
     money = Mathf.Max(0, money - GetHotelCost());
