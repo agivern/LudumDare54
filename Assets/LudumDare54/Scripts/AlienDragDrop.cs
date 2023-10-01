@@ -58,6 +58,7 @@ public class AlienDragDrop : MonoBehaviour
       else if (hit.collider != null && hit.collider.gameObject.CompareTag("Lobby"))
       {
         alien.MoveToLobby();
+
       }
       else
       {

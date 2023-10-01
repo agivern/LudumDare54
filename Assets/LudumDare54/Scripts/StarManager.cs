@@ -27,12 +27,15 @@ public class StarManager : MonoBehaviour
       // TODO Victory screen
     }
 
+    AudioManager.instance.PlayEarnStarAudio();
+
     UpdateUI();
   }
 
   public void CustomerHate()
   {
-    stars--;
+    stars = Mathf.Max(0, stars - 1);
+    AudioManager.instance.PlayLostStarAudio();
     UpdateUI();
   }
 

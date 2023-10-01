@@ -28,6 +28,7 @@ public class Alien : MonoBehaviour
     SetRandomRoomStayDuration();
     desires = new DesireGenerator().GenerateDesire();
     likeBox.Initialize(desires);
+    AudioManager.instance.PlaySpawnAudio();
   }
 
   private void Update()
@@ -89,6 +90,7 @@ public class Alien : MonoBehaviour
     room.AddAlien(this);
     MoveToRandomPositionInRoom();
     LineManager.instance.RemoveAlien(this);
+    AudioManager.instance.PlayDropInRoomAudio();
   }
 
   private void UpdateHappiness()
