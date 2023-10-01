@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AlienStarIndicator : MonoBehaviour
 {
-  public float timeActive = 2f;
+  public float timeActive = 4f;
   public GameObject starHappy;
   public GameObject starNotHappy;
   public void Play(int stars)

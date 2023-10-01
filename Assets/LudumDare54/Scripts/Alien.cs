@@ -169,7 +169,7 @@ public class Alien : MonoBehaviour
     MoveTo(exitWarp.transform.position);
 
 
-    Invoke("WalkToExit", 2f);
+    Invoke("WalkToExit", 1f);
   }
 
   private void WalkToExit()
