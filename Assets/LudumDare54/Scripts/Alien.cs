@@ -64,13 +64,12 @@ public class Alien : MonoBehaviour
   {
     UpdateHappiness();
 
-    if (room != null)
+
+    if (roomStayDuration == 0 || happiness == -5 || happiness == 10)
     {
-      if (roomStayDuration == 0 || happiness == -5 || happiness == 10)
-      {
-        LeaveHotel();
-      }
+      LeaveHotel();
     }
+
 
     UpdateRemainingTime();
     UpdateTimerImage();
@@ -124,6 +123,11 @@ public class Alien : MonoBehaviour
 
   private void LeaveHotel()
   {
+    if (exiting)
+    {
+      return;
+    }
+    
     exiting = true;
     var pay = 5 + Mathf.Max(0, 50 + (Mathf.RoundToInt(happiness) * 3));
     MoneyManager.instance.CustomerPay(pay);
@@ -146,7 +150,8 @@ public class Alien : MonoBehaviour
     }
 
 
-    room.RemoveAlien(this);
+    LineManager.instance.RemoveAlien(this);
+    room?.RemoveAlien(this);
 
     room = null;
 
