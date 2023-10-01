@@ -27,6 +27,34 @@ public class Alien : MonoBehaviour
         likeBox.Initialize(desires);
     }
 
+    private void Update()
+    {
+        MoveInRoom();
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1); // Hack
+    }
+
+    void MoveInRoom()
+    {
+        if (room == null)
+        {
+            return;
+        }
+
+        var movement = GetComponent<AlienMovement>();
+        if (movement.reachedDestination && Random.value < Time.deltaTime * 0.2f)
+        {
+            MoveToRandomPositionInRoom();
+        }
+    }
+
+    private void MoveToRandomPositionInRoom()
+    {
+        var randomPositionInRoom = room.transform.position.x + Random.Range(-room.roomWidth / 2, room.roomWidth / 2);
+        var destination = new Vector2(randomPositionInRoom, 0);
+        GetComponent<AlienMovement>().SetDestination(destination);
+    }
+    
 
     void LateUpdate()
     {
@@ -54,9 +82,8 @@ public class Alien : MonoBehaviour
     {
         room = newRoom;
         room.AddAlien(this);
-        MoveTo(room.transform.position);
+        MoveToRandomPositionInRoom();
         LineManager.instance.RemoveAlien(this);
-        // TODO move gameobject in room
     }
 
     private void UpdateHappiness()
@@ -72,7 +99,7 @@ public class Alien : MonoBehaviour
 
     private void SetRandomRoomStayDuration()
     {
-        int baseDuration = Random.Range(15, 31);
+        int baseDuration = Random.Range(15, 20);
         int multiplier = StarManager.instance.Stars;
 
         // Convert the multiplier to a factor between 100 (1x) and 300 (3x)
@@ -116,6 +143,16 @@ public class Alien : MonoBehaviour
     public void CloseExpressDesires()
     {
         likeBox.gameObject.SetActive(false);
+    }
+    
+    void OnMouseOver()
+    {
+        ExpressDesires();
+    }
+
+    void OnMouseExit()
+    {
+        CloseExpressDesires();
     }
 
     public void MoveToLobby()

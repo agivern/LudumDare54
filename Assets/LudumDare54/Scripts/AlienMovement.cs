@@ -8,6 +8,8 @@ public class AlienMovement : MonoBehaviour
     public bool isInSpace = false;
     private Vector2 currentDestination;
 
+    public bool reachedDestination = false;
+
     public float speed = 10f;
 
     private Rigidbody2D rb;
@@ -40,17 +42,17 @@ public class AlienMovement : MonoBehaviour
         xMovement *= speed;
         rb.velocity = new Vector2(xMovement, rb.velocity.y);
 
-        // var xDistance = Mathf.Abs(currentDestination.x - transform.position.x);
-        // if (xDistance < 0.01f)
-        // {
-        //     hasDestination = false;
-        //     rb.velocity = new Vector2(0, rb.velocity.y);
-        // }
+        var xDistance = Mathf.Abs(currentDestination.x - transform.position.x);
+        if (xDistance < 0.01f)
+        {
+            reachedDestination = true;
+        }
     }
 
     public void SetDestination(Vector2 position)
     {
         currentDestination = position;
         hasDestination = true;
+        reachedDestination = false;
     }
 }

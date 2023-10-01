@@ -7,7 +7,8 @@ public class Room : MonoBehaviour
 {
   [SerializeField] List<Alien> aliens = new List<Alien>();
   [SerializeField] List<RoomObject> roomObjects = new List<RoomObject>();
-  
+
+  public float roomWidth = 6f;
   void Start()
   {
 

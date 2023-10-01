@@ -19,22 +19,24 @@ public class LineManager : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        if (lineup.Any())
+        {
+            lineup[0].ExpressDesires();
+        }
+    }
+
     public void AddAlien(Alien alien)
     {
         if (lineup.Contains(alien))
         {
             return;
         }
-        
+
         lineup.Add(alien);
         var pos = LineupPositionToWorldPosition(lineup.Count - 1);
         alien.MoveTo(pos);
-
-
-        if (lineup.Any())
-        {
-            lineup[0].ExpressDesires();
-        }
     }
 
     public void RemoveAlien(Alien alien)
@@ -45,12 +47,8 @@ public class LineManager : MonoBehaviour
         {
             UpdateAllAlienPositions();
         }
-        
+
         alien.CloseExpressDesires();
-        if (lineup.Any())
-        {
-            lineup[0].ExpressDesires();
-        }
     }
 
     private void UpdateAllAlienPositions()
