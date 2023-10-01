@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.375
       objectReference: {fileID: 0}
+    - target: {fileID: 3172466106059229523, guid: 7424c9759c4504f2eb65f35d4742ccb4, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: db65e285e148c42ab8eb12240d943766, type: 3}
     - target: {fileID: 4830255042788797135, guid: 7424c9759c4504f2eb65f35d4742ccb4, type: 3}
       propertyPath: animatorOverrideController
       value: 

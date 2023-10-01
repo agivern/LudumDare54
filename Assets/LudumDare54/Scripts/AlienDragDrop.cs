@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 public class AlienDragDrop : MonoBehaviour
 {
   [SerializeField] private LayerMask droppableLayersToCheck;
+  [SerializeField] AudioSource alienCry;
+
   public static AlienDragDrop CurrentlyDragging { get; private set; }
 
   private bool _isDragging = false;
@@ -28,6 +30,7 @@ public class AlienDragDrop : MonoBehaviour
         {
           _isDragging = true;
           CurrentlyDragging = this;
+          alienCry.Play();
         }
       }
     }
@@ -65,6 +68,8 @@ public class AlienDragDrop : MonoBehaviour
         //Alien is in space
         alien.MoveToSpace();
       }
+
+      alienCry.Stop();
     }
   }
 
