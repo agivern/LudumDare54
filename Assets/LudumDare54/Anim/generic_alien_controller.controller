@@ -147,31 +147,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: vy
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: in_love
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: in_rage
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: floating
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -211,10 +211,10 @@ AnimatorStateMachine:
     m_Position: {x: 350, y: 280, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
+  - {fileID: 2342382838644501050}
   - {fileID: 3347603299288917858}
   - {fileID: 3542488619896049502}
   - {fileID: 7507745840711560565}
-  - {fileID: 2342382838644501050}
   - {fileID: -8065989858502534704}
   - {fileID: -7113382006284066826}
   m_EntryTransitions: []
@@ -236,12 +236,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: vx
     m_EventTreshold: -0.1
-  - m_ConditionMode: 2
-    m_ConditionEvent: in_love
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: in_rage
-    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: floating
     m_EventTreshold: 0
@@ -271,12 +265,6 @@ AnimatorStateTransition:
     m_ConditionEvent: vx
     m_EventTreshold: 0.1
   - m_ConditionMode: 2
-    m_ConditionEvent: in_love
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: in_rage
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
     m_ConditionEvent: floating
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -304,6 +292,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: in_love
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: vx
+    m_EventTreshold: 0.1
+  - m_ConditionMode: 3
+    m_ConditionEvent: vx
+    m_EventTreshold: -0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3668413779884992146}
   m_Solo: 0
@@ -476,6 +470,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: in_rage
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: vx
+    m_EventTreshold: 0.1
+  - m_ConditionMode: 3
+    m_ConditionEvent: vx
+    m_EventTreshold: -0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1161583514124527602}
   m_Solo: 0

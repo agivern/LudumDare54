@@ -13,27 +13,17 @@ public class Room : MonoBehaviour
 
 
     public float roomWidth = 6f;
-
-    void Start()
-    {
-        roomObjects.Add(roomObjectType);
-
-        if (roomObjects.Count >= maxObject)
-        {
-            shopButtons.ForEach(shopButton => shopButton.interactable = false);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    
     public void AddRoomObject(RoomObjectType roomObjectType)
     {
         if (roomObjects.Contains(roomObjectType) == false)
         {
             roomObjects.Add(roomObjectType);
+
+            if (roomObjects.Count >= maxObject)
+            {
+                shopButtons.ForEach(shopButton => shopButton.interactable = false);
+            }
         }
         else
         {
