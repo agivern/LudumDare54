@@ -38,6 +38,11 @@ public class LikeBox : MonoBehaviour
 
     private void InstantiateDesire(Desire desire, Transform parent, int count)
     {
+        if (desire is LineDesire)
+        {
+            return;
+        }
+
         var alienSprite = Instantiate(alienSpritePrefab, parent.position, Quaternion.identity, parent);
         var alienSpriteRenderer = alienSprite.GetComponent<SpriteRenderer>();
         alienSpriteRenderer.sprite = GetSpriteForDesire(desire);

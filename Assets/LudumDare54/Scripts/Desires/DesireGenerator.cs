@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class DesireGenerator
 {
-    
-    
     public List<Desire> GenerateDesire()
     {
         var desires = new List<Desire>();
         var numberOfDesires = this.numberOfDesires();
-        for (var i =0; i< numberOfDesires; i++)
+        for (var i = 0; i < numberOfDesires; i++)
         {
             var desire = createDesire();
             // Fix me ugly
@@ -18,8 +16,11 @@ public class DesireGenerator
             {
                 continue;
             }
+
             desires.Add(desire);
         }
+
+        desires.Add(new LineDesire(6f, -1f));
 
         return desires;
     }
@@ -28,11 +29,11 @@ public class DesireGenerator
     {
         return Mathf.FloorToInt(1 + (StarManager.instance.Stars / 5f));
     }
-    
+
     private Desire createDesire()
     {
         // TODO add object desires
-       return createRaceDesire();
+        return createRaceDesire();
     }
 
     private RaceDesire createRaceDesire()

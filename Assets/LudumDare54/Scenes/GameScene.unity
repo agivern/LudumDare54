@@ -7206,6 +7206,10 @@ PrefabInstance:
       propertyPath: moneyUI
       value: 
       objectReference: {fileID: 1708431120}
+    - target: {fileID: 5141993640994063859, guid: 09a2b77aef9c946dfa45f9d7ce4dee7c, type: 3}
+      propertyPath: defaultHotelCost
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
