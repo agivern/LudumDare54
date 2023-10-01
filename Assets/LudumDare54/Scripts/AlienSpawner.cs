@@ -31,6 +31,7 @@ public class AlienSpawner : MonoBehaviour
       {
         SpawnAlien();
       }
+
       nextSpawnTime = Time.time + NextSpawnSecs();
     }
   }
@@ -56,7 +57,7 @@ public class AlienSpawner : MonoBehaviour
     var stars = StarManager.instance.Stars;
 
     return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
-        .Select(alienByStars => alienByStars.race).ToList();
+      .Select(alienByStars => alienByStars.race).ToList();
   }
 
   public GameObject RandomSpawnableAliens()
@@ -70,7 +71,7 @@ public class AlienSpawner : MonoBehaviour
     var stars = StarManager.instance.Stars;
 
     return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
-        .Select(alienByStars => alienByStars.alienPrefab).ToList();
+      .Select(alienByStars => alienByStars.alienPrefab).ToList();
   }
 }
 

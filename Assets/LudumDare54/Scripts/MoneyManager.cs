@@ -3,69 +3,69 @@ using TMPro;
 
 public class MoneyManager : MonoBehaviour
 {
-    public static MoneyManager instance;
+  public static MoneyManager instance;
 
-    [SerializeField] int money;
-    [SerializeField] int defaultHotelCost;
-    [SerializeField] TextMeshProUGUI moneyUI;
+  [SerializeField] int money;
+  [SerializeField] int defaultHotelCost;
+  [SerializeField] TextMeshProUGUI moneyUI;
 
-    private float timer = 1f;
+  private float timer = 1f;
 
-    private void Awake()
+  private void Awake()
+  {
+    instance = this;
+  }
+
+  private void Start()
+  {
+    UpdateUI();
+  }
+
+  private void LateUpdate()
+  {
+    timer -= Time.deltaTime;
+
+    if (timer <= 0)
     {
-        instance = this;
-    }
+      timer = 1f;
 
-    private void Start()
+      DeductCost();
+    }
+  }
+
+  public void CustomerPay(int value)
+  {
+    money += Mathf.Max(0, value);
+    UpdateUI();
+  }
+
+  public void PurchaseItem(int value)
+  {
+    if (value > 0)
     {
-        UpdateUI();
+      money = Mathf.Max(0, money - value);
+      UpdateUI();
     }
+  }
 
-    private void LateUpdate()
+  private void DeductCost()
+  {
+    money = Mathf.Max(0, money - GetHotelCost());
+    UpdateUI();
+
+    if (money == 0)
     {
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            timer = 1f;
-
-            DeductCost();
-        }
+      // TODO Trigger GAME OVER
     }
+  }
 
-    public void CustomerPay(int value)
-    {
-        money += Mathf.Max(0, value);
-        UpdateUI();
-    }
+  private void UpdateUI()
+  {
+    moneyUI.text = money.ToString();
+  }
 
-    public void PurchaseItem(int value)
-    {
-        if (value > 0)
-        {
-            money = Mathf.Max(0, money - value);
-            UpdateUI();
-        }
-    }
-
-    private void DeductCost()
-    {
-        money = Mathf.Max(0, money - GetHotelCost());
-        UpdateUI();
-
-        if (money == 0)
-        {
-            // TODO Trigger GAME OVER
-        }
-    }
-
-    private void UpdateUI()
-    {
-        moneyUI.text = money.ToString();
-    }
-
-    public int GetHotelCost()
-    {
-        return defaultHotelCost + ((StarManager.instance.Stars + 20) / 20) - 1;
-    }
+  public int GetHotelCost()
+  {
+    return defaultHotelCost + ((StarManager.instance.Stars + 20) / 20) - 1;
+  }
 }

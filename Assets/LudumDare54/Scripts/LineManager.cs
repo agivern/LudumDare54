@@ -6,63 +6,63 @@ using UnityEngine;
 
 public class LineManager : MonoBehaviour
 {
-    public List<Alien> lineup;
+  public List<Alien> lineup;
 
-    public float spacing = 1f;
+  public float spacing = 1f;
 
-    public Transform endOfLineUp;
+  public Transform endOfLineUp;
 
-    public static LineManager instance;
+  public static LineManager instance;
 
-    private void Awake()
+  private void Awake()
+  {
+    instance = this;
+  }
+
+  private void Update()
+  {
+    if (lineup.Any())
     {
-        instance = this;
+      lineup[0].ExpressDesires();
+    }
+  }
+
+  public void AddAlien(Alien alien)
+  {
+    if (lineup.Contains(alien))
+    {
+      return;
     }
 
-    private void Update()
+    lineup.Add(alien);
+    var pos = LineupPositionToWorldPosition(lineup.Count - 1);
+    alien.MoveTo(pos);
+  }
+
+  public void RemoveAlien(Alien alien)
+  {
+    var removed = lineup.Remove(alien);
+
+    if (removed)
     {
-        if (lineup.Any())
-        {
-            lineup[0].ExpressDesires();
-        }
+      UpdateAllAlienPositions();
     }
 
-    public void AddAlien(Alien alien)
+    alien.CloseExpressDesires();
+  }
+
+  private void UpdateAllAlienPositions()
+  {
+    for (var i = 0; i < lineup.Count; i++)
     {
-        if (lineup.Contains(alien))
-        {
-            return;
-        }
-
-        lineup.Add(alien);
-        var pos = LineupPositionToWorldPosition(lineup.Count - 1);
-        alien.MoveTo(pos);
+      var alien = lineup[i];
+      var pos = LineupPositionToWorldPosition(i);
+      alien.MoveTo(pos);
     }
+  }
 
-    public void RemoveAlien(Alien alien)
-    {
-        var removed = lineup.Remove(alien);
-
-        if (removed)
-        {
-            UpdateAllAlienPositions();
-        }
-
-        alien.CloseExpressDesires();
-    }
-
-    private void UpdateAllAlienPositions()
-    {
-        for (var i = 0; i < lineup.Count; i++)
-        {
-            var alien = lineup[i];
-            var pos = LineupPositionToWorldPosition(i);
-            alien.MoveTo(pos);
-        }
-    }
-
-    private Vector2 LineupPositionToWorldPosition(int position)
-    {
-        return (Vector2)endOfLineUp.position + (Vector2.left * (position * spacing));
-    }
+  private Vector2 LineupPositionToWorldPosition(int position)
+  {
+    return (Vector2)endOfLineUp.position + (Vector2.left * (position * spacing));
+  }
 }

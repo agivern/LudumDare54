@@ -4,80 +4,81 @@ using System.Collections.Generic;
 
 public class AlienAnimator : MonoBehaviour
 {
-    public AnimatorOverrideController animatorOverrideController;
+  public AnimatorOverrideController animatorOverrideController;
 
-    private Rigidbody2D rb;
+  private Rigidbody2D rb;
 
-    // private Alien alien;
-    private AlienMovement alienMov;
-    private AlienDragDrop alienDragDrop;
-    private Animator animator;
+  // private Alien alien;
+  private AlienMovement alienMov;
+  private AlienDragDrop alienDragDrop;
+  private Animator animator;
 
 
-    private void Awake()
+  private void Awake()
+  {
+    rb = GetComponentInParent<Rigidbody2D>();
+
+    // alien = GetComponentInParent<Alien>();
+
+    alienMov = GetComponentInParent<AlienMovement>();
+
+    alienDragDrop = GetComponentInParent<AlienDragDrop>();
+
+    animator = GetComponent<Animator>();
+
+    var rtAnimator = GetComponent<RuntimeAnimatorController>();
+
+    animator = GetComponent<Animator>();
+
+    animator.runtimeAnimatorController = animatorOverrideController;
+  }
+
+  private void Update()
+  {
+  }
+
+  private void FixedUpdate()
+  {
+    FlipCharacter();
+    UpdateAnimatorVars();
+  }
+
+  private void FlipCharacter()
+  {
+    Vector3 velocity = rb.velocity;
+
+    if (velocity.x < -0.1)
     {
-        rb = GetComponentInParent<Rigidbody2D>();
-
-        // alien = GetComponentInParent<Alien>();
-
-        alienMov = GetComponentInParent<AlienMovement>();
-
-        alienDragDrop = GetComponentInParent<AlienDragDrop>();
-
-        animator = GetComponent<Animator>();
-
-        var rtAnimator = GetComponent<RuntimeAnimatorController>();
-
-        animator = GetComponent<Animator>();
-
-        animator.runtimeAnimatorController = animatorOverrideController;
+      transform.localScale = new Vector3(-1f, 1f, 1f);
     }
-
-    private void Update()
+    else if (velocity.x > 0.1)
     {
+      transform.localScale = new Vector3(1f, 1f, 1f);
     }
+  }
 
-    private void FixedUpdate()
-    {
-        FlipCharacter();
-        UpdateAnimatorVars();
-    }
+  private void UpdateAnimatorVars()
+  {
+    animator.SetFloat("vx", rb.velocity.x);
+    animator.SetBool("floating", alienMov.isInSpace || alienDragDrop.isDragging);
+  }
 
-    private void FlipCharacter()
+  public void SetEmotion(float statisfaction)
+  {
+    if (statisfaction > 0)
     {
-        Vector3 velocity = rb.velocity;
-
-        if (velocity.x < -0.1)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-        else if (velocity.x > 0.1)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
+      animator.SetBool("in_love", true);
+      animator.SetBool("in_rage", false);
     }
-
-    private void UpdateAnimatorVars()
+    else if (statisfaction < 0)
     {
-        animator.SetFloat("vx", rb.velocity.x);
-        animator.SetBool("floating", alienMov.isInSpace || alienDragDrop.isDragging);
+      animator.SetBool("in_love", false);
+      animator.SetBool("in_rage", true);
     }
-    
-    public void SetEmotion(float statisfaction)
+    else
     {
-        if (statisfaction > 0)
-        {
-            animator.SetBool("in_love", true);
-            animator.SetBool("in_rage", false);
-        } else if (statisfaction < 0)
-        {
-            animator.SetBool("in_love", false);
-            animator.SetBool("in_rage", true);
-        }
-        else
-        {
-            animator.SetBool("in_love", false);
-            animator.SetBool("in_rage", false);
-        }
+      animator.SetBool("in_love", false);
+      animator.SetBool("in_rage", false);
     }
+  }
 }
