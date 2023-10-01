@@ -5,8 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
-
 using UnityEngine.SceneManagement;
+
 public class Alien : MonoBehaviour
 {
     public Room room { get; private set; }
@@ -18,7 +18,7 @@ public class Alien : MonoBehaviour
     private float timer = 1f;
     private List<Desire> desires = new List<Desire>();
     private bool exiting = false;
-    
+
     void Start()
     {
         SetRandomRoomStayDuration();
@@ -53,7 +53,7 @@ public class Alien : MonoBehaviour
         var destination = new Vector2(randomPositionInRoom, 0);
         MoveTo(destination);
     }
-    
+
 
     void LateUpdate()
     {
@@ -109,7 +109,6 @@ public class Alien : MonoBehaviour
 
     private void LeaveHotel()
     {
-
         if (happiness > 0)
         {
             MoneyManager.instance.CustomerPay(10);
@@ -121,23 +120,27 @@ public class Alien : MonoBehaviour
                 // TODO trigger cash animation
             }
         }
+
         room.RemoveAlien(this);
 
         room = null;
 
         GameObject exitWarp = GameObject.FindWithTag("exit_warp");
         GameObject exit = GameObject.FindWithTag("exit");
-        if( exitWarp != null) {
+        if (exitWarp != null)
+        {
             this.transform.position = exitWarp.transform.position;
             MoveTo(exit.transform.position);
-        } else {
-        GameObject.Destroy(this.gameObject);
+        }
+        else
+        {
+            GameObject.Destroy(this.gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("exit"))
+        if (other.CompareTag("exit") && exiting)
         {
             GameObject.Destroy(this.gameObject);
         }
@@ -157,7 +160,7 @@ public class Alien : MonoBehaviour
     {
         likeBox.gameObject.SetActive(false);
     }
-    
+
     void OnMouseOver()
     {
         ExpressDesires();
@@ -189,5 +192,4 @@ public class Alien : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         rb.angularVelocity = Random.Range(-300f, 300f);
     }
-
 }
