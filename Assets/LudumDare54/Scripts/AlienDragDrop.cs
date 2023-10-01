@@ -7,8 +7,7 @@ public class AlienDragDrop : MonoBehaviour
     [SerializeField] private LayerMask droppableLayersToCheck;
     public static AlienDragDrop CurrentlyDragging { get; private set; }
 
-
-    private bool isDragging = false;
+    private bool _isDragging = false;
 
     private Alien alien;
 
@@ -20,21 +19,21 @@ public class AlienDragDrop : MonoBehaviour
     private void Update()
     {
         // On mouse down, start dragging
-        if (Input.GetMouseButtonDown(0) && !isDragging)
+        if (Input.GetMouseButtonDown(0) && !_isDragging)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (GetComponent<Collider2D>().OverlapPoint(mousePos))
             {
                 if (CurrentlyDragging == null)
                 {
-                    isDragging = true;
+                    _isDragging = true;
                     CurrentlyDragging = this;
                 }
             }
         }
 
         // While dragging, move with mouse
-        if (isDragging)
+        if (_isDragging)
         {
             Vector3 mousePos =
                 Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
@@ -42,9 +41,9 @@ public class AlienDragDrop : MonoBehaviour
         }
 
         // On mouse release, stop dragging and check drop
-        if (Input.GetMouseButtonUp(0) && isDragging)
+        if (Input.GetMouseButtonUp(0) && _isDragging)
         {
-            isDragging = false;
+            _isDragging = false;
             CurrentlyDragging = null;
 
             RaycastHit2D hit = Physics2D.Raycast(
@@ -65,6 +64,12 @@ public class AlienDragDrop : MonoBehaviour
                 //Alien is in space
                 alien.MoveToSpace();
             }
+        }
+    }
+
+    public bool isDragging {
+        get {
+            return _isDragging;
         }
     }
 }
