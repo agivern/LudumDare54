@@ -81,6 +81,7 @@ public class Alien : MonoBehaviour
 
     public void MoveToRoom(Room newRoom)
     {
+        room?.RemoveAlien(this);
         room = newRoom;
         room.AddAlien(this);
         MoveToRandomPositionInRoom();
