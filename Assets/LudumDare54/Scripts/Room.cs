@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Room : MonoBehaviour
 {
     [SerializeField] List<Alien> aliens = new List<Alien>();
     [SerializeField] List<RoomObjectType> roomObjects = new List<RoomObjectType>();
+    [SerializeField] List<Button> shopButtons;
+    [SerializeField] int maxObject;
+
 
     public float roomWidth = 6f;
 
     void Start()
     {
+        roomObjects.Add(roomObjectType);
+
+        if (roomObjects.Count >= maxObject)
+        {
+            shopButtons.ForEach(shopButton => shopButton.interactable = false);
+        }
     }
 
     // Update is called once per frame

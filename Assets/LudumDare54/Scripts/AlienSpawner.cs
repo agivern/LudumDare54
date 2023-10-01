@@ -7,74 +7,77 @@ using Random = UnityEngine.Random;
 
 public class AlienSpawner : MonoBehaviour
 {
-    public static AlienSpawner instance;
+  public static AlienSpawner instance;
 
-    public float baseSpawnRate = 10f;
-    public float randomAmount = 0.5f;
+  public float baseSpawnRate = 10f;
+  public float randomAmount = 0.5f;
 
-    public Transform spawnPoint;
+  public Transform spawnPoint;
 
-    private float nextSpawnTime = 0f;
+  private float nextSpawnTime = 0f;
 
-    public AlienRaceByStars[] alienRaceByStars;
+  public AlienRaceByStars[] alienRaceByStars;
 
-    void Awake()
+  void Awake()
+  {
+    instance = this;
+  }
+
+  private void Update()
+  {
+    if (Time.time > nextSpawnTime)
     {
-        instance = this;
+      if (LineManager.instance.lineup.Count < 9)
+      {
+        SpawnAlien();
+      }
+      nextSpawnTime = Time.time + NextSpawnSecs();
     }
+  }
 
-    private void Update()
-    {
-        if (Time.time > nextSpawnTime)
-        {
-            SpawnAlien();
-            nextSpawnTime = Time.time + NextSpawnSecs();
-        }
-    }
+  private float NextSpawnSecs()
+  {
+    var reductionAmount = (StarManager.instance.Stars + 20) / 20;
+    var spawnRate = baseSpawnRate / reductionAmount;
 
-    private float NextSpawnSecs()
-    {
-        var reductionAmount = (StarManager.instance.Stars + 20) / 20;
-        var spawnRate = baseSpawnRate / reductionAmount;
+    var allo = spawnRate + Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
+    return allo;
+  }
 
-        var allo = spawnRate + Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
-        return allo;
-    }
+  public void SpawnAlien()
+  {
+    var alienPrefab = RandomSpawnableAliens();
+    var alienObj = Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
+    LineManager.instance.AddAlien(alienObj.GetComponent<Alien>());
+  }
 
-    public void SpawnAlien()
-    {
-        var alienPrefab = RandomSpawnableAliens();
-        var alienObj = Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
-        LineManager.instance.AddAlien(alienObj.GetComponent<Alien>());
-    }
+  public List<AlienRace> SpawnableRaces()
+  {
+    var stars = StarManager.instance.Stars;
 
-    public List<AlienRace> SpawnableRaces()
-    {
-        var stars = StarManager.instance.Stars;
+    return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
+        .Select(alienByStars => alienByStars.race).ToList();
+  }
 
-        return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
-            .Select(alienByStars => alienByStars.race).ToList();
-    }
+  public GameObject RandomSpawnableAliens()
+  {
+    var alienPrefabs = SpawnableAliens();
+    return alienPrefabs[Random.Range(0, alienPrefabs.Count)];
+  }
 
-    public GameObject RandomSpawnableAliens()
-    {
-        var alienPrefabs = SpawnableAliens();
-        return alienPrefabs[Random.Range(0, alienPrefabs.Count)];
-    }
+  public List<GameObject> SpawnableAliens()
+  {
+    var stars = StarManager.instance.Stars;
 
-    public List<GameObject> SpawnableAliens()
-    {
-        var stars = StarManager.instance.Stars;
-
-        return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
-            .Select(alienByStars => alienByStars.alienPrefab).ToList();
-    }
+    return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
+        .Select(alienByStars => alienByStars.alienPrefab).ToList();
+  }
 }
 
 [System.Serializable]
 public class AlienRaceByStars
 {
-    public AlienRace race;
-    public int starsRequired;
-    public GameObject alienPrefab;
+  public AlienRace race;
+  public int starsRequired;
+  public GameObject alienPrefab;
 }
