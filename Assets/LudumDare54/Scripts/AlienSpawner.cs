@@ -34,10 +34,10 @@ public class AlienSpawner : MonoBehaviour
 
     private float NextSpawnSecs()
     {
-        var reductionAmount = (StarManager.instance.Stars + 10) / 10;
+        var reductionAmount = (StarManager.instance.Stars + 20) / 20;
         var spawnRate = baseSpawnRate / reductionAmount;
 
-        var allo = spawnRate + UnityEngine.Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
+        var allo = spawnRate + Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
         return allo;
     }
 
