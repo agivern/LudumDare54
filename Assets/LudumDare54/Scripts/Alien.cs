@@ -6,20 +6,19 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 
+using UnityEngine.SceneManagement;
 public class Alien : MonoBehaviour
 {
     public Room room { get; private set; }
-    private int roomStayDuration;
-    private float happiness = 100;
-
-    private float timer = 1f;
-
+    public LikeBox likeBox;
     public AlienRace race = AlienRace.Green;
 
+    private int roomStayDuration;
+    private float happiness = 100;
+    private float timer = 1f;
     private List<Desire> desires = new List<Desire>();
-
-    public LikeBox likeBox;
-
+    private bool exiting = false;
+    
     void Start()
     {
         SetRandomRoomStayDuration();
@@ -52,7 +51,7 @@ public class Alien : MonoBehaviour
     {
         var randomPositionInRoom = room.transform.position.x + Random.Range(-room.roomWidth / 2, room.roomWidth / 2);
         var destination = new Vector2(randomPositionInRoom, 0);
-        GetComponent<AlienMovement>().SetDestination(destination);
+        MoveTo(destination);
     }
     
 
@@ -110,6 +109,7 @@ public class Alien : MonoBehaviour
 
     private void LeaveHotel()
     {
+
         if (happiness > 0)
         {
             MoneyManager.instance.CustomerPay(10);
@@ -118,16 +118,29 @@ public class Alien : MonoBehaviour
             {
                 StarManager.instance.CustomerTip();
                 // TODO trigger sound effect
+                // TODO trigger cash animation
             }
         }
-
         room.RemoveAlien(this);
 
         room = null;
 
-        // TODO Trigger Animation
-        // TODO Destroy Gameobject at the end of animation
+        GameObject exitWarp = GameObject.FindWithTag("exit_warp");
+        GameObject exit = GameObject.FindWithTag("exit");
+        if( exitWarp != null) {
+            this.transform.position = exitWarp.transform.position;
+            MoveTo(exit.transform.position);
+        } else {
         GameObject.Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("exit"))
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 
     public void MoveTo(Vector2 position)
@@ -176,4 +189,5 @@ public class Alien : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         rb.angularVelocity = Random.Range(-300f, 300f);
     }
+
 }

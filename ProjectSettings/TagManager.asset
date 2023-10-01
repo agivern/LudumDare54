@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Room
   - Lobby
+  - exit_warp
+  - exit
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,7 @@ public class AlienAnimator : MonoBehaviour
 {
     public AnimatorOverrideController animatorOverrideController;
     private Rigidbody2D rb;
-    private Alien alien;
+    // private Alien alien;
     private AlienMovement alienMov;
     private AlienDragDrop alienDragDrop;
     private Animator animator;
