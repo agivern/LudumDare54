@@ -5,7 +5,7 @@ public class StarManager : MonoBehaviour
 {
     public static StarManager instance;
 
-    [SerializeField] int stars;
+    [SerializeField] int stars = 5;
     [SerializeField] TextMeshProUGUI starsUI;
 
     private void Awake()

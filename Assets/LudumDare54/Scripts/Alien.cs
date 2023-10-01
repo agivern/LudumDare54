@@ -105,19 +105,24 @@ public class Alien : MonoBehaviour
         {
             return;
         }
+
         roomStayDuration = Mathf.Max(0, roomStayDuration - Time.deltaTime);
     }
 
     private void SetRandomRoomStayDuration()
     {
-        int baseDuration = Random.Range(15, 20);
-        int multiplier = StarManager.instance.Stars;
-
-        // Convert the multiplier to a factor between 100 (1x) and 300 (3x)
-        int factor = 100 + 2 * multiplier;
-
-        maxRoomStayDuration = (baseDuration * factor) / 100;
+        maxRoomStayDuration = 15;
         roomStayDuration = maxRoomStayDuration;
+
+
+        // int baseDuration = Random.Range(15, 20);
+        // int multiplier = StarManager.instance.Stars;
+        //
+        // // Convert the multiplier to a factor between 100 (1x) and 300 (3x)
+        // int factor = 100 + 2 * multiplier;
+        //
+        // maxRoomStayDuration = (baseDuration * factor) / 100;
+        // roomStayDuration = maxRoomStayDuration;
     }
 
 
@@ -127,12 +132,15 @@ public class Alien : MonoBehaviour
         var pay = 5 + Mathf.Max(0, 50 + (Mathf.RoundToInt(happiness) * 3));
         MoneyManager.instance.CustomerPay(pay);
         Debug.Log(happiness);
+
         if (happiness >= 5)
         {
             StarManager.instance.CustomerTip();
         }
+
         else if (happiness <= -5)
         {
+            StarManager.instance.CustomerHate();
             StarManager.instance.CustomerHate();
         }
 
@@ -208,6 +216,8 @@ public class Alien : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None;
         rb.angularVelocity = Random.Range(-300f, 300f);
 
+        StarManager.instance.CustomerHate();
+        StarManager.instance.CustomerHate();
         StarManager.instance.CustomerHate();
     }
 }

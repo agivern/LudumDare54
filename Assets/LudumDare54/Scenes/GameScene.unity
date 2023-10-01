@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3210802898538130503, guid: e79ed49bd293c4704aa80307e14cd1be, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7902210438675170095, guid: e79ed49bd293c4704aa80307e14cd1be, type: 3}
       propertyPath: m_RootOrder
@@ -298,7 +298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7902210438675170095, guid: e79ed49bd293c4704aa80307e14cd1be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.6
+      value: 1.83
       objectReference: {fileID: 0}
     - target: {fileID: 7902210438675170095, guid: e79ed49bd293c4704aa80307e14cd1be, type: 3}
       propertyPath: m_LocalPosition.y
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a89de8e8d194da9b2e68f5351621b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnRate: 5
+  baseSpawnRate: 4
   randomAmount: 0.2
   spawnPoint: {fileID: 739306561}
   alienRaceByStars:
@@ -845,10 +845,10 @@ MonoBehaviour:
     starsRequired: 3
     alienPrefab: {fileID: 9123740690616379021, guid: be29eabf7b134fa469fa71b5b94b8707, type: 3}
   - race: 1
-    starsRequired: 12
+    starsRequired: 6
     alienPrefab: {fileID: 221768749944938432, guid: 83df75c13f0549949b58493f4299b80b, type: 3}
   - race: 3
-    starsRequired: 30
+    starsRequired: 10
     alienPrefab: {fileID: 7073253886411188140, guid: c209bd249aee6f145a79ebf883134ad1, type: 3}
 --- !u!4 &777880104
 Transform:

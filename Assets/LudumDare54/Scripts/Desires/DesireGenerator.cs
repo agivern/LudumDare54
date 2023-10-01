@@ -20,7 +20,7 @@ public class DesireGenerator
             desires.Add(desire);
         }
 
-        desires.Add(new LineDesire(6f, -1f));
+        desires.Add(new LineDesire(10f, -1f));
 
         return desires;
     }
@@ -40,7 +40,7 @@ public class DesireGenerator
     {
         var possibleRaces = AlienSpawner.instance.SpawnableRaces();
         var race = possibleRaces[Random.Range(0, possibleRaces.Count)];
-        var satisfactionLevel = Random.value > 0.35f ? 1 : -1;
+        var satisfactionLevel = Random.value > 0.5f ? 1 : -1;
         return new RaceDesire(race, satisfactionLevel);
     }
 }
