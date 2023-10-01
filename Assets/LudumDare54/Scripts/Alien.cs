@@ -6,192 +6,202 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Alien : MonoBehaviour
 {
-    public Room room { get; private set; }
-    public LikeBox likeBox;
-    public AlienRace race = AlienRace.Green;
+  public Room room { get; private set; }
+  public LikeBox likeBox;
+  public AlienRace race = AlienRace.Green;
+  [SerializeField] Image timerImage;
 
-    private int roomStayDuration;
-    private float happiness = 0;
-    private float timer = 1f;
-    private List<Desire> desires = new List<Desire>();
-    private bool exiting = false;
+  private int maxRoomStayDuration;
+  private int roomStayDuration;
+  private float happiness = 0;
+  private float timer = 1f;
+  private List<Desire> desires = new List<Desire>();
+  private bool exiting = false;
 
-    public AlienAnimator animator;
+  public AlienAnimator animator;
 
-    void Start()
+  void Start()
+  {
+    SetRandomRoomStayDuration();
+    desires = new DesireGenerator().GenerateDesire();
+    likeBox.Initialize(desires);
+  }
+
+  private void Update()
+  {
+    MoveInRoom();
+
+    transform.position = new Vector3(transform.position.x, transform.position.y, -1); // Hack
+  }
+
+  void MoveInRoom()
+  {
+    if (room == null)
     {
-        SetRandomRoomStayDuration();
-        desires = new DesireGenerator().GenerateDesire();
-        likeBox.Initialize(desires);
+      return;
     }
 
-    private void Update()
+    var movement = GetComponent<AlienMovement>();
+    if (movement.reachedDestination && Random.value < Time.deltaTime * 0.2f)
     {
-        MoveInRoom();
+      MoveToRandomPositionInRoom();
+    }
+  }
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, -1); // Hack
+  private void MoveToRandomPositionInRoom()
+  {
+    var randomPositionInRoom = room.transform.position.x + Random.Range(-room.roomWidth / 2, room.roomWidth / 2);
+    var destination = new Vector2(randomPositionInRoom, 0);
+    MoveTo(destination);
+  }
+
+
+  void LateUpdate()
+  {
+    if (room != null)
+    {
+      // Leave hotel at the top of the loop to be trigger a frame after roomStayDuration update (prevent bug in happiness calcul)
+      if (roomStayDuration == 0)
+      {
+        LeaveHotel();
+      }
+
+      timer -= Time.deltaTime;
+      if (timer <= 0)
+      {
+        timer = 1f;
+
+        UpdateHappiness();
+
+        UpdateRemainingTime();
+
+        UpdateTimerImage();
+      }
+    }
+  }
+
+  private void UpdateTimerImage()
+  {
+    timerImage.fillAmount = (float)roomStayDuration / (float)maxRoomStayDuration;
+  }
+
+  public void MoveToRoom(Room newRoom)
+  {
+    room?.RemoveAlien(this);
+    room = newRoom;
+    room.AddAlien(this);
+    MoveToRandomPositionInRoom();
+    LineManager.instance.RemoveAlien(this);
+  }
+
+  private void UpdateHappiness()
+  {
+    var statisfaction = desires.Sum(desire => desire.satisfaction(this));
+    happiness += statisfaction * Time.deltaTime;
+
+    animator.SetEmotion(statisfaction);
+  }
+
+  private void UpdateRemainingTime()
+  {
+    roomStayDuration = Mathf.Max(0, roomStayDuration - 1);
+  }
+
+  private void SetRandomRoomStayDuration()
+  {
+    int baseDuration = Random.Range(15, 20);
+    int multiplier = StarManager.instance.Stars;
+
+    // Convert the multiplier to a factor between 100 (1x) and 300 (3x)
+    int factor = 100 + 2 * multiplier;
+
+    maxRoomStayDuration = (baseDuration * factor) / 100;
+    roomStayDuration = maxRoomStayDuration;
+  }
+
+  private void LeaveHotel()
+  {
+    exiting = true;
+    var pay = 10 + Mathf.Max(0, 20 + Mathf.RoundToInt(happiness));
+    MoneyManager.instance.CustomerPay(pay);
+    if (happiness >= 0)
+    {
+      StarManager.instance.CustomerTip();
     }
 
-    void MoveInRoom()
+    room.RemoveAlien(this);
+
+    room = null;
+
+    GameObject exitWarp = GameObject.FindWithTag("exit_warp");
+    GameObject exit = GameObject.FindWithTag("exit");
+    if (exitWarp != null)
     {
-        if (room == null)
-        {
-            return;
-        }
-
-        var movement = GetComponent<AlienMovement>();
-        if (movement.reachedDestination && Random.value < Time.deltaTime * 0.2f)
-        {
-            MoveToRandomPositionInRoom();
-        }
+      this.transform.position = exitWarp.transform.position;
+      MoveTo(exit.transform.position);
     }
-
-    private void MoveToRandomPositionInRoom()
+    else
     {
-        var randomPositionInRoom = room.transform.position.x + Random.Range(-room.roomWidth / 2, room.roomWidth / 2);
-        var destination = new Vector2(randomPositionInRoom, 0);
-        MoveTo(destination);
+      GameObject.Destroy(this.gameObject);
     }
+  }
 
-
-    void LateUpdate()
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("exit") && exiting)
     {
-        if (room != null)
-        {
-            // Leave hotel at the top of the loop to be trigger a frame after roomStayDuration update (prevent bug in happiness calcul)
-            if (roomStayDuration == 0)
-            {
-                LeaveHotel();
-            }
-
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                timer = 1f;
-
-                UpdateHappiness();
-
-                UpdateRemainingTime();
-            }
-        }
+      GameObject.Destroy(this.gameObject);
     }
+  }
 
-    public void MoveToRoom(Room newRoom)
-    {
-        room?.RemoveAlien(this);
-        room = newRoom;
-        room.AddAlien(this);
-        MoveToRandomPositionInRoom();
-        LineManager.instance.RemoveAlien(this);
-    }
+  public void MoveTo(Vector2 position)
+  {
+    GetComponent<AlienMovement>().SetDestination(position);
+  }
 
-    private void UpdateHappiness()
-    {
-        var statisfaction = desires.Sum(desire => desire.satisfaction(this));
-        happiness += statisfaction * Time.deltaTime;
+  public void ExpressDesires()
+  {
+    likeBox.gameObject.SetActive(true);
+  }
 
-        animator.SetEmotion(statisfaction);
-    }
+  public void CloseExpressDesires()
+  {
+    likeBox.gameObject.SetActive(false);
+  }
 
-    private void UpdateRemainingTime()
-    {
-        roomStayDuration = Mathf.Max(0, roomStayDuration - 1);
-    }
+  void OnMouseOver()
+  {
+    ExpressDesires();
+  }
 
-    private void SetRandomRoomStayDuration()
-    {
-        int baseDuration = Random.Range(15, 20);
-        int multiplier = StarManager.instance.Stars;
+  void OnMouseExit()
+  {
+    CloseExpressDesires();
+  }
 
-        // Convert the multiplier to a factor between 100 (1x) and 300 (3x)
-        int factor = 100 + 2 * multiplier;
+  public void MoveToLobby()
+  {
+    room?.RemoveAlien(this);
+    room = null;
+    LineManager.instance.AddAlien(this);
+  }
 
-        roomStayDuration = (baseDuration * factor) / 100;
-    }
-
-    private void LeaveHotel()
-    {
-        exiting = true;
-        var pay = 10 + Mathf.Max(0, 20 + Mathf.RoundToInt(happiness));
-        MoneyManager.instance.CustomerPay(pay);
-        if (happiness >= 0)
-        {
-            StarManager.instance.CustomerTip();
-        }
-
-
-        room.RemoveAlien(this);
-
-        room = null;
-
-        GameObject exitWarp = GameObject.FindWithTag("exit_warp");
-        GameObject exit = GameObject.FindWithTag("exit");
-        if (exitWarp != null)
-        {
-            this.transform.position = exitWarp.transform.position;
-            MoveTo(exit.transform.position);
-        }
-        else
-        {
-            GameObject.Destroy(this.gameObject);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("exit") && exiting)
-        {
-            GameObject.Destroy(this.gameObject);
-        }
-    }
-
-    public void MoveTo(Vector2 position)
-    {
-        GetComponent<AlienMovement>().SetDestination(position);
-    }
-
-    public void ExpressDesires()
-    {
-        likeBox.gameObject.SetActive(true);
-    }
-
-    public void CloseExpressDesires()
-    {
-        likeBox.gameObject.SetActive(false);
-    }
-
-    void OnMouseOver()
-    {
-        ExpressDesires();
-    }
-
-    void OnMouseExit()
-    {
-        CloseExpressDesires();
-    }
-
-    public void MoveToLobby()
-    {
-        room?.RemoveAlien(this);
-        room = null;
-        LineManager.instance.AddAlien(this);
-    }
-
-    public void MoveToSpace()
-    {
-        room?.RemoveAlien(this);
-        room = null;
-        LineManager.instance.RemoveAlien(this);
-        GetComponent<AlienMovement>().isInSpace = true;
-        GetComponent<AlienDragDrop>().enabled = false;
-        var rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
-        rb.drag = 0;
-        rb.velocity = transform.position.normalized * 0.2f;
-        rb.constraints = RigidbodyConstraints2D.None;
-        rb.angularVelocity = Random.Range(-300f, 300f);
-    }
+  public void MoveToSpace()
+  {
+    room?.RemoveAlien(this);
+    room = null;
+    LineManager.instance.RemoveAlien(this);
+    GetComponent<AlienMovement>().isInSpace = true;
+    GetComponent<AlienDragDrop>().enabled = false;
+    var rb = GetComponent<Rigidbody2D>();
+    rb.gravityScale = 0;
+    rb.drag = 0;
+    rb.velocity = transform.position.normalized * 0.2f;
+    rb.constraints = RigidbodyConstraints2D.None;
+    rb.angularVelocity = Random.Range(-300f, 300f);
+  }
 }
