@@ -1,9 +1,8 @@
+public interface Desire
+{
+  public float satisfaction(Alien alien);
 
-    public interface Desire
-    {
-        public float satisfaction(Alien alien);
+  public bool Likes();
 
-        public bool Likes();
-
-        public bool Equals(Desire other);
-    }
+  public bool Equals(Desire other);
+}

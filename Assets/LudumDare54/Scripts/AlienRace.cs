@@ -1,9 +1,7 @@
-
-    public enum AlienRace
-    {
-        Green,
-        Yellow,
-        Red,
-        Purple,
-    }
-
+public enum AlienRace
+{
+  Green,
+  Yellow,
+  Red,
+  Purple,
+}
