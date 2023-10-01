@@ -39,7 +39,7 @@ public class DesireGenerator
     {
         var possibleRaces = AlienSpawner.instance.SpawnableRaces();
         var race = possibleRaces[Random.Range(0, possibleRaces.Count)];
-        var satisfactionLevel = Random.value > 0.25f ? 1 : -1;
+        var satisfactionLevel = Random.value > 0.35f ? 1 : -1;
         return new RaceDesire(race, satisfactionLevel);
     }
 }
