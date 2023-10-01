@@ -14,10 +14,12 @@ public class Alien : MonoBehaviour
     public AlienRace race = AlienRace.Green;
 
     private int roomStayDuration;
-    private float happiness = 100;
+    private float happiness = 0;
     private float timer = 1f;
     private List<Desire> desires = new List<Desire>();
     private bool exiting = false;
+
+    public AlienAnimator animator;
 
     void Start()
     {
@@ -89,6 +91,8 @@ public class Alien : MonoBehaviour
     {
         var statisfaction = desires.Sum(desire => desire.satisfaction(this));
         happiness += statisfaction * Time.deltaTime;
+
+        animator.SetEmotion(statisfaction);
     }
 
     private void UpdateRemainingTime()
@@ -109,17 +113,14 @@ public class Alien : MonoBehaviour
 
     private void LeaveHotel()
     {
-        if (happiness > 0)
+        exiting = true;
+        var pay = 5 + Mathf.Max(0, 10 + Mathf.RoundToInt(happiness));
+        MoneyManager.instance.CustomerPay(pay);
+        if (happiness >= 0)
         {
-            MoneyManager.instance.CustomerPay(10);
-
-            if (happiness > 80)
-            {
-                StarManager.instance.CustomerTip();
-                // TODO trigger sound effect
-                // TODO trigger cash animation
-            }
+            StarManager.instance.CustomerTip();
         }
+
 
         room.RemoveAlien(this);
 
