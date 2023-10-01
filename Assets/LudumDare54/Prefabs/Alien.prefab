@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d5b13855f147eb9dacc4baf8b52926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasDestination: 0
+  isInSpace: 0
+  reachedDestination: 0
   speed: 1.5
 --- !u!1 &1506851903387598039
 GameObject:
@@ -162,6 +165,8 @@ GameObject:
   m_Component:
   - component: {fileID: 145110893732119913}
   - component: {fileID: 1623831875852643134}
+  - component: {fileID: 7907563047620977209}
+  - component: {fileID: 4830255042788797135}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -236,6 +241,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7907563047620977209
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506851903387598039}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 893ee1a3cb509544499ac53c1bff1f04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4830255042788797135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506851903387598039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae977424f57cdf499fdd1f1b6412dce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idle: {fileID: 7400000, guid: 88ee1c4a0197741499dd74d0d6ee804b, type: 2}
+  walk: {fileID: 7400000, guid: 57b2cbc3ac149ca46a906a3f572924da, type: 2}
+  love: {fileID: 7400000, guid: ae550524ee1550b4b9691f04b8a03d10, type: 2}
+  angry: {fileID: 7400000, guid: 88ee1c4a0197741499dd74d0d6ee804b, type: 2}
+  rb: {fileID: 3998196180531467625}
+  vx: 0
 --- !u!1001 &3494329518603206438
 PrefabInstance:
   m_ObjectHideFlags: 0

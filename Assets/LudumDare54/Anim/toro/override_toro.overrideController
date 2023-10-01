@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: override_toro
+  m_Controller: {fileID: 9100000, guid: 893ee1a3cb509544499ac53c1bff1f04, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a3062ebed03cc204090bb9a88d55a156, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 353124da61e26364e8ca6e686b7ea379, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 20ccadee6e5ebde4a8138ab4ae652ce5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 88ee1c4a0197741499dd74d0d6ee804b, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fdbb7980a98baef438269da57c06149e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ae550524ee1550b4b9691f04b8a03d10, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 09798ddaeea194f4f8fbde6f748bf4ab, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 57b2cbc3ac149ca46a906a3f572924da, type: 2}
