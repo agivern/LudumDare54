@@ -40,14 +40,13 @@ public class DesireGenerator
     {
       return 4;
     }
-    else if (StarManager.instance.Stars > 15f)
+
+    if (StarManager.instance.Stars > 15f)
     {
       return 3;
     }
-    else
-    {
-      return 2;
-    }
+
+    return 2;
   }
 
   private Desire createDesire()
