@@ -36,7 +36,18 @@ public class DesireGenerator
 
   private int numberOfDesires()
   {
-    return Mathf.FloorToInt(1 + (StarManager.instance.Stars / 5f));
+    if (StarManager.instance.Stars > 25f)
+    {
+      return 4;
+    }
+    else if (StarManager.instance.Stars > 15f)
+    {
+      return 3;
+    }
+    else
+    {
+      return 2;
+    }
   }
 
   private Desire createDesire()
@@ -52,7 +63,7 @@ public class DesireGenerator
 
     if (AlienSpawner.instance.SpawnableRaces().Count > 1)
     {
-      var satisfactionLevel = Random.value > 0.7f ? 1 : -1;
+      var satisfactionLevel = Random.value > 0.75f ? 1 : -1;
       return new RaceDesire(race, satisfactionLevel);
     }
     else

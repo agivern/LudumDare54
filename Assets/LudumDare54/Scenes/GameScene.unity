@@ -850,13 +850,13 @@ MonoBehaviour:
     starsRequired: 0
     alienPrefab: {fileID: 3933701808903187796, guid: 65758e226f71bed47a39af59096ed70c, type: 3}
   - race: 2
-    starsRequired: 3
+    starsRequired: 7
     alienPrefab: {fileID: 9123740690616379021, guid: be29eabf7b134fa469fa71b5b94b8707, type: 3}
   - race: 1
-    starsRequired: 6
+    starsRequired: 13
     alienPrefab: {fileID: 221768749944938432, guid: 83df75c13f0549949b58493f4299b80b, type: 3}
   - race: 3
-    starsRequired: 10
+    starsRequired: 18
     alienPrefab: {fileID: 7073253886411188140, guid: c209bd249aee6f145a79ebf883134ad1, type: 3}
 --- !u!4 &777880104
 Transform:
@@ -6782,6 +6782,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2611793116505568306, guid: e90c75ae252f24ce2ada216b483bc833, type: 3}
+      propertyPath: stars
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2611793116505568306, guid: e90c75ae252f24ce2ada216b483bc833, type: 3}
       propertyPath: starsUI
       value: 
