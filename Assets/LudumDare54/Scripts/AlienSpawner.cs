@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AlienSpawner : MonoBehaviour
 {
@@ -10,8 +11,6 @@ public class AlienSpawner : MonoBehaviour
 
     public float baseSpawnRate = 10f;
     public float randomAmount = 0.5f;
-
-    public GameObject alienPrefab;
 
     public Transform spawnPoint;
 
@@ -44,6 +43,7 @@ public class AlienSpawner : MonoBehaviour
 
     public void SpawnAlien()
     {
+        var alienPrefab = RandomSpawnableAliens();
         var alienObj = Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
         LineManager.instance.AddAlien(alienObj.GetComponent<Alien>());
     }
@@ -52,11 +52,22 @@ public class AlienSpawner : MonoBehaviour
     {
         var stars = StarManager.instance.Stars;
 
-        var spawnableRaces = new List<AlienRace>();
-        spawnableRaces.Add(AlienRace.Green);
-
         return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
             .Select(alienByStars => alienByStars.race).ToList();
+    }
+
+    public GameObject RandomSpawnableAliens()
+    {
+        var alienPrefabs = SpawnableAliens();
+        return alienPrefabs[Random.Range(0, alienPrefabs.Count)];
+    }
+
+    public List<GameObject> SpawnableAliens()
+    {
+        var stars = StarManager.instance.Stars;
+
+        return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
+            .Select(alienByStars => alienByStars.alienPrefab).ToList();
     }
 }
 
@@ -65,4 +76,5 @@ public class AlienRaceByStars
 {
     public AlienRace race;
     public int starsRequired;
+    public GameObject alienPrefab;
 }
