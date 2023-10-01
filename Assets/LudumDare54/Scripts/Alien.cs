@@ -16,9 +16,8 @@ public class Alien : MonoBehaviour
     [SerializeField] Image timerImage;
 
     private int maxRoomStayDuration;
-    private int roomStayDuration;
+    private float roomStayDuration;
     private float happiness = 0;
-    private float timer = 1f;
     private List<Desire> desires = new List<Desire>();
     private bool exiting = false;
 
@@ -62,6 +61,8 @@ public class Alien : MonoBehaviour
 
     void LateUpdate()
     {
+        UpdateHappiness();
+
         if (room != null)
         {
             // Leave hotel at the top of the loop to be trigger a frame after roomStayDuration update (prevent bug in happiness calcul)
@@ -69,24 +70,16 @@ public class Alien : MonoBehaviour
             {
                 LeaveHotel();
             }
-
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                timer = 1f;
-
-                UpdateHappiness();
-
-                UpdateRemainingTime();
-
-                UpdateTimerImage();
-            }
         }
+
+        UpdateRemainingTime();
+        UpdateTimerImage();
     }
 
     private void UpdateTimerImage()
     {
-        timerImage.fillAmount = (float)roomStayDuration / (float)maxRoomStayDuration;
+        timerImage.transform.parent.gameObject.SetActive(room != null);
+        timerImage.fillAmount = roomStayDuration / maxRoomStayDuration;
     }
 
     public void MoveToRoom(Room newRoom)
@@ -108,7 +101,11 @@ public class Alien : MonoBehaviour
 
     private void UpdateRemainingTime()
     {
-        roomStayDuration = Mathf.Max(0, roomStayDuration - 1);
+        if (room == null)
+        {
+            return;
+        }
+        roomStayDuration = Mathf.Max(0, roomStayDuration - Time.deltaTime);
     }
 
     private void SetRandomRoomStayDuration()

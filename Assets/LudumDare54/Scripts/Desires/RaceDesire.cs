@@ -12,6 +12,11 @@ public class RaceDesire : Desire
 
     public float satisfaction(Alien alien)
     {
+        if (alien.room == null)
+        {
+            return 0;
+        }
+
         if (alien.room.ContainsRace(race, alien))
         {
             return satisfactionLevel;
