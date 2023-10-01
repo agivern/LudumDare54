@@ -38,7 +38,7 @@ public class AlienDragDrop : MonoBehaviour
         {
             Vector3 mousePos =
                 Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-            transform.position = mousePos;
+            transform.position = mousePos + (Vector3.down * 0.2f);
         }
 
         // On mouse release, stop dragging and check drop
@@ -55,7 +55,6 @@ public class AlienDragDrop : MonoBehaviour
             {
                 var room = hit.collider.gameObject.GetComponent<Room>();
                 alien.MoveToRoom(room);
-                this.enabled = false;
             }
             else if (hit.collider != null && hit.collider.gameObject.CompareTag("Lobby"))
             {

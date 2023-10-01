@@ -638,17 +638,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpawnRate: 4
   randomAmount: 0.5
-  alienPrefab: {fileID: 3933701808903187796, guid: 65758e226f71bed47a39af59096ed70c, type: 3}
   spawnPoint: {fileID: 739306561}
   alienRaceByStars:
   - race: 0
     starsRequired: 0
+    alienPrefab: {fileID: 3933701808903187796, guid: 65758e226f71bed47a39af59096ed70c, type: 3}
   - race: 2
     starsRequired: 3
+    alienPrefab: {fileID: 9123740690616379021, guid: be29eabf7b134fa469fa71b5b94b8707, type: 3}
   - race: 1
     starsRequired: 15
+    alienPrefab: {fileID: 221768749944938432, guid: 83df75c13f0549949b58493f4299b80b, type: 3}
   - race: 3
     starsRequired: 30
+    alienPrefab: {fileID: 7073253886411188140, guid: c209bd249aee6f145a79ebf883134ad1, type: 3}
 --- !u!4 &777880104
 Transform:
   m_ObjectHideFlags: 0
@@ -1065,7 +1068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineup: []
-  spacing: 0.25
+  spacing: 0.6
   endOfLineUp: {fileID: 959114430}
 --- !u!1 &1497573608
 GameObject:
