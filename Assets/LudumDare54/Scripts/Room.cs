@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Room : MonoBehaviour
 {
   [SerializeField] List<Alien> aliens = new List<Alien>();
   [SerializeField] List<RoomObjectType> roomObjects = new List<RoomObjectType>();
+  [SerializeField] List<Button> shopButtons;
+  [SerializeField] int maxObject;
 
   public float roomWidth = 6f;
   void Start()
@@ -25,6 +28,11 @@ public class Room : MonoBehaviour
     if (roomObjects.Contains(roomObjectType) == false)
     {
       roomObjects.Add(roomObjectType);
+
+      if (roomObjects.Count >= maxObject)
+      {
+        shopButtons.ForEach(shopButton => shopButton.interactable = false);
+      }
     }
     else
     {
