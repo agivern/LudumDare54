@@ -32,9 +32,9 @@ public class StarManager : MonoBehaviour
     UpdateUI();
   }
 
-  public void CustomerHate()
+  public void CustomerHate(int value)
   {
-    stars = Mathf.Max(0, stars - 1);
+    stars = Mathf.Max(0, stars - value);
     AudioManager.instance.PlayLostStarAudio();
     UpdateUI();
   }

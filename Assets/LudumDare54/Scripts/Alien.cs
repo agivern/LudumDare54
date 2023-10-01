@@ -120,16 +120,6 @@ public class Alien : MonoBehaviour
   {
     maxRoomStayDuration = 15;
     roomStayDuration = maxRoomStayDuration;
-
-
-    // int baseDuration = Random.Range(15, 20);
-    // int multiplier = StarManager.instance.Stars;
-    //
-    // // Convert the multiplier to a factor between 100 (1x) and 300 (3x)
-    // int factor = 100 + 2 * multiplier;
-    //
-    // maxRoomStayDuration = (baseDuration * factor) / 100;
-    // roomStayDuration = maxRoomStayDuration;
   }
 
 
@@ -147,8 +137,7 @@ public class Alien : MonoBehaviour
     }
     else if (happiness <= -5)
     {
-      StarManager.instance.CustomerHate();
-      StarManager.instance.CustomerHate();
+      StarManager.instance.CustomerHate(2);
       GetComponent<AlienStarIndicator>().Play(-2);
       animator.SetEmotion(happiness);
     }
@@ -203,7 +192,10 @@ public class Alien : MonoBehaviour
 
   void OnMouseOver()
   {
-    ExpressDesires();
+    if (room != null || LineManager.instance.GetNextCustomer() == this)
+    {
+      ExpressDesires();
+    }
   }
 
   void OnMouseExit()
@@ -232,8 +224,7 @@ public class Alien : MonoBehaviour
     rb.constraints = RigidbodyConstraints2D.None;
     rb.angularVelocity = Random.Range(-300f, 300f);
 
-    StarManager.instance.CustomerHate();
-    StarManager.instance.CustomerHate();
-    StarManager.instance.CustomerHate();
+    StarManager.instance.CustomerHate(3);
+    Destroy(this.gameObject, 3f);
   }
 }

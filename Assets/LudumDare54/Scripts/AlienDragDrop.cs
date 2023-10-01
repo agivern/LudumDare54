@@ -26,7 +26,7 @@ public class AlienDragDrop : MonoBehaviour
       Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       if (GetComponent<Collider2D>().OverlapPoint(mousePos))
       {
-        if (CurrentlyDragging == null)
+        if (CurrentlyDragging == null && (alien.room != null || LineManager.instance.GetNextCustomer() == alien))
         {
           _isDragging = true;
           CurrentlyDragging = this;

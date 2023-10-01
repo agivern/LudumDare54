@@ -61,6 +61,11 @@ public class LineManager : MonoBehaviour
     }
   }
 
+  public Alien GetNextCustomer()
+  {
+    return lineup[0];
+  }
+
   private Vector2 LineupPositionToWorldPosition(int position)
   {
     return (Vector2)endOfLineUp.position + (Vector2.left * (position * spacing));
