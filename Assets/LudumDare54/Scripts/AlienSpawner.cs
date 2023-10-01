@@ -18,6 +18,8 @@ public class AlienSpawner : MonoBehaviour
 
   public AlienRaceByStars[] alienRaceByStars;
 
+  public bool pause = true;
+
   void Awake()
   {
     instance = this;
@@ -25,19 +27,22 @@ public class AlienSpawner : MonoBehaviour
 
   private void Update()
   {
-    if (Time.time > nextSpawnTime)
+    if (pause == false)
     {
-      if (LineManager.instance.lineup.Count < 9)
+      if (Time.time > nextSpawnTime)
+      {
+        if (LineManager.instance.lineup.Count < 9)
+        {
+          SpawnAlien();
+        }
+
+        nextSpawnTime = Time.time + NextSpawnSecs();
+      }
+      else if (LineManager.instance.lineup.Count == 0)
       {
         SpawnAlien();
+        nextSpawnTime = Time.time + NextSpawnSecs();
       }
-
-      nextSpawnTime = Time.time + NextSpawnSecs();
-    }
-    else if (LineManager.instance.lineup.Count == 0)
-    {
-      SpawnAlien();
-      nextSpawnTime = Time.time + NextSpawnSecs();
     }
   }
 
