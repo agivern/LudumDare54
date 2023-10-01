@@ -115,7 +115,7 @@ public class Alien : MonoBehaviour
     private void LeaveHotel()
     {
         exiting = true;
-        var pay = 5 + Mathf.Max(0, 10 + Mathf.RoundToInt(happiness));
+        var pay = 10 + Mathf.Max(0, 20 + Mathf.RoundToInt(happiness));
         MoneyManager.instance.CustomerPay(pay);
         if (happiness >= 0)
         {

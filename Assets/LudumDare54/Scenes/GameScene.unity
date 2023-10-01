@@ -826,8 +826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a89de8e8d194da9b2e68f5351621b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnRate: 4
-  randomAmount: 0.5
+  baseSpawnRate: 5
+  randomAmount: 0.2
   spawnPoint: {fileID: 739306561}
   alienRaceByStars:
   - race: 0
@@ -837,7 +837,7 @@ MonoBehaviour:
     starsRequired: 3
     alienPrefab: {fileID: 9123740690616379021, guid: be29eabf7b134fa469fa71b5b94b8707, type: 3}
   - race: 1
-    starsRequired: 15
+    starsRequired: 12
     alienPrefab: {fileID: 221768749944938432, guid: 83df75c13f0549949b58493f4299b80b, type: 3}
   - race: 3
     starsRequired: 30
