@@ -38,11 +38,6 @@ public class AlienSpawner : MonoBehaviour
 
         nextSpawnTime = Time.time + NextSpawnSecs();
       }
-      else if (LineManager.instance.lineup.Count == 0)
-      {
-        SpawnAlien();
-        nextSpawnTime = Time.time + NextSpawnSecs();
-      }
     }
   }
 

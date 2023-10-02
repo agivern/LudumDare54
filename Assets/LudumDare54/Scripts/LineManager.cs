@@ -63,6 +63,10 @@ public class LineManager : MonoBehaviour
 
   public Alien GetNextCustomer()
   {
+    if (lineup.Count == 0)
+    {
+      return null;
+    }
     return lineup[0];
   }
 
