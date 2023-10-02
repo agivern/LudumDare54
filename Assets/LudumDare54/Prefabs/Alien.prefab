@@ -1171,7 +1171,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 113638076133068214, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1749188267845600908, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_RootOrder
@@ -1219,15 +1219,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1988536415556257045, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2994368520818610074, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3383830205867119550, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3693784761375953353, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_Name
@@ -1235,11 +1235,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4103215596893721447, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5428959424996742573, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7575868770219862660, guid: 51de6d08c571c43d688730dedb3a80a2, type: 3}
       propertyPath: spaceBetween
