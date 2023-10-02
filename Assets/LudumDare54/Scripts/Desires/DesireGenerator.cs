@@ -17,7 +17,7 @@ public class DesireGenerator
       desires.Add(des);
 
       var probaHate = Random.Range(0, 100);
-      if (probaHate < 70)
+      if (probaHate < 60)
       {
         var race2 = race;
         do
@@ -77,7 +77,7 @@ public class DesireGenerator
 
     if (AlienSpawner.instance.SpawnableRaces().Count > 1)
     {
-      var satisfactionLevel = Random.value > 0.6f ? 1 : -1;
+      var satisfactionLevel = Random.value > 0.4f ? 1 : -1;
       return new RaceDesire(race, satisfactionLevel);
     }
     else

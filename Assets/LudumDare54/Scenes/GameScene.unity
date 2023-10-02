@@ -1305,7 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a89de8e8d194da9b2e68f5351621b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnRate: 5
+  baseSpawnRate: 3.5
   randomAmount: 0.35
   spawnPoint: {fileID: 739306561}
   alienRaceByStars:
