@@ -31,22 +31,39 @@ public class Room : MonoBehaviour
   private void UpgradeRoomStars()
   {
     roomStars++;
-    if (roomStars == 10)
+    if (roomStars == 8)
+    {
+      objects[0].SetActive(true);
+    }
+    else if (roomStars == 10)
     {
       backgrounds[0].SetActive(false);
       backgrounds[1].SetActive(true);
     }
+    else if (roomStars == 13)
+    {
+      objects[1].SetActive(true);
+    }
+    else if (roomStars == 16)
+    {
+      objects[2].SetActive(true);
+    }
+    else if (roomStars == 18)
+    {
+      objects[3].SetActive(true);
+    }
     else if (roomStars == 20)
+    {
+      objects[4].SetActive(true);
+    }
+    else if (roomStars == 22)
     {
       backgrounds[1].SetActive(false);
       backgrounds[2].SetActive(true);
     }
-    else if (roomStars == 20)
-    {
-    }
     else if (roomStars == 25)
     {
-
+      objects[5].SetActive(true);
     }
   }
 
