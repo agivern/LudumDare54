@@ -16,11 +16,6 @@ public class MoneyManager : MonoBehaviour
     instance = this;
   }
 
-  private void Start()
-  {
-    UpdateUI();
-  }
-
   private void LateUpdate()
   {
     timer -= Time.deltaTime;
@@ -36,7 +31,6 @@ public class MoneyManager : MonoBehaviour
   public void CustomerPay(int value)
   {
     money += Mathf.Max(0, value);
-    UpdateUI();
   }
 
   public void PurchaseItem(int value)
@@ -44,24 +38,17 @@ public class MoneyManager : MonoBehaviour
     if (value > 0)
     {
       money = Mathf.Max(0, money - value);
-      UpdateUI();
     }
   }
 
   private void DeductCost()
   {
     money = Mathf.Max(0, money - GetHotelCost());
-    UpdateUI();
 
     if (money == 0)
     {
       // TODO Trigger GAME OVER
     }
-  }
-
-  private void UpdateUI()
-  {
-    moneyUI.text = money.ToString();
   }
 
   public int GetHotelCost()

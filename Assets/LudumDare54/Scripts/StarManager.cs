@@ -8,7 +8,7 @@ public class StarManager : MonoBehaviour
   [SerializeField] int stars = 5;
   [SerializeField] int maxStarsLevel = 5;
   [SerializeField] TextMeshProUGUI starsUI;
-  
+
   public GameObject victoryScreen;
   public GameObject defeatScreen;
 
@@ -19,10 +19,6 @@ public class StarManager : MonoBehaviour
     instance = this;
   }
 
-  private void Start()
-  {
-    UpdateUI();
-  }
 
   public void CustomerTip()
   {
@@ -44,8 +40,6 @@ public class StarManager : MonoBehaviour
     }
 
     AudioManager.instance.PlayEarnStarAudio();
-
-    UpdateUI();
   }
 
   public void CustomerHate(int value)
@@ -54,21 +48,15 @@ public class StarManager : MonoBehaviour
     {
       return;
     }
-    
+
     stars = Mathf.Max(0, stars - value);
     AudioManager.instance.PlayLostStarAudio();
-    UpdateUI();
 
     if (stars <= 0)
     {
       isFinished = true;
       defeatScreen.SetActive(true);
     }
-  }
-
-  private void UpdateUI()
-  {
-    starsUI.text = stars.ToString();
   }
 
   public int Stars
