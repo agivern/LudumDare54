@@ -66,6 +66,6 @@ public class MoneyManager : MonoBehaviour
 
   public int GetHotelCost()
   {
-    return defaultHotelCost + ((StarManager.instance.Stars + 20) / 20) - 1;
+    return defaultHotelCost + ((StarManager.instance.MaxStarsLevel + 20) / 20) - 1;
   }
 }
