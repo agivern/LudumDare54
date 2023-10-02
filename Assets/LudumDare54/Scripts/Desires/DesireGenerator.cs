@@ -36,12 +36,12 @@ public class DesireGenerator
 
   private int numberOfDesires()
   {
-    if (StarManager.instance.Stars > 25f)
+    if (StarManager.instance.MaxStarsLevel > 25f)
     {
       return 4;
     }
 
-    if (StarManager.instance.Stars > 15f)
+    if (StarManager.instance.MaxStarsLevel > 15f)
     {
       return 3;
     }

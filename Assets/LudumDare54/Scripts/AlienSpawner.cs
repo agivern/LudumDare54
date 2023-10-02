@@ -48,7 +48,7 @@ public class AlienSpawner : MonoBehaviour
 
   private float NextSpawnSecs()
   {
-    var reductionAmount = (StarManager.instance.Stars + 30) / 30;
+    var reductionAmount = (StarManager.instance.MaxStarsLevel + 30) / 30;
     var spawnRate = baseSpawnRate / reductionAmount;
 
     var allo = spawnRate + Random.Range(-randomAmount * spawnRate, randomAmount * spawnRate);
@@ -64,7 +64,7 @@ public class AlienSpawner : MonoBehaviour
 
   public List<AlienRace> SpawnableRaces()
   {
-    var stars = StarManager.instance.Stars;
+    var stars = StarManager.instance.MaxStarsLevel;
 
     return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
       .Select(alienByStars => alienByStars.race).ToList();
@@ -78,7 +78,7 @@ public class AlienSpawner : MonoBehaviour
 
   public List<GameObject> SpawnableAliens()
   {
-    var stars = StarManager.instance.Stars;
+    var stars = StarManager.instance.MaxStarsLevel;
 
     return alienRaceByStars.Where(alienByStars => stars >= alienByStars.starsRequired)
       .Select(alienByStars => alienByStars.alienPrefab).ToList();

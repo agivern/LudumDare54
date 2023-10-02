@@ -6,6 +6,7 @@ public class StarManager : MonoBehaviour
   public static StarManager instance;
 
   [SerializeField] int stars = 5;
+  [SerializeField] int maxStarsLevel = 5;
   [SerializeField] TextMeshProUGUI starsUI;
 
   private void Awake()
@@ -25,6 +26,11 @@ public class StarManager : MonoBehaviour
     if (stars >= 100)
     {
       // TODO Victory screen
+    }
+
+    if (stars > maxStarsLevel)
+    {
+      maxStarsLevel = stars;
     }
 
     AudioManager.instance.PlayEarnStarAudio();
@@ -47,5 +53,10 @@ public class StarManager : MonoBehaviour
   public int Stars
   {
     get { return stars; }
+  }
+
+  public int MaxStarsLevel
+  {
+    get { return maxStarsLevel; }
   }
 }
