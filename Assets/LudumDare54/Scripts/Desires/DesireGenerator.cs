@@ -29,16 +29,16 @@ public class DesireGenerator
         desires.Add(new RaceDesire(race2, -1));
       }
 
-      if (AlienSpawner.instance.SpawnableRaces().Count == 4)
-      {
-        var race3 = race;
-        do
-        {
-          race3 = possibleRaces[Random.Range(0, possibleRaces.Count)];
+      // if (AlienSpawner.instance.SpawnableRaces().Count == 4)
+      // {
+      //   var race3 = race;
+      //   do
+      //   {
+      //     race3 = possibleRaces[Random.Range(0, possibleRaces.Count)];
 
-        } while (race3 == race || race3 == race2);
-        desires.Add(new RaceDesire(race3, 1));
-      }
+      //   } while (race3 == race || race3 == race2);
+      //   desires.Add(new RaceDesire(race3, 1));
+      // }
     }
 
     if (AlienSpawner.instance.SpawnableRaces().Count == 1)
