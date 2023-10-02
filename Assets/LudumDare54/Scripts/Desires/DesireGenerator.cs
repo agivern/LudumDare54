@@ -19,12 +19,8 @@ public class DesireGenerator
       var randomHate = Random.Range(0, 100);
 
       var race2 = race;
-      var probaHate = 65;
-      if (AlienSpawner.instance.SpawnableRaces().Count == 3)
-      {
-        probaHate = 70;
-      }
-      else if (AlienSpawner.instance.SpawnableRaces().Count == 4)
+      var probaHate = 70;
+      if (AlienSpawner.instance.SpawnableRaces().Count == 4)
       {
         probaHate = 75;
       }
