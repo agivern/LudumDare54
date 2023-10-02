@@ -8,6 +8,11 @@ public class StarManager : MonoBehaviour
   [SerializeField] int stars = 5;
   [SerializeField] int maxStarsLevel = 5;
   [SerializeField] TextMeshProUGUI starsUI;
+  
+  public GameObject victoryScreen;
+  public GameObject defeatScreen;
+
+  public bool isFinished = false;
 
   private void Awake()
   {
@@ -21,11 +26,16 @@ public class StarManager : MonoBehaviour
 
   public void CustomerTip()
   {
+    if (isFinished)
+    {
+      return;
+    }
     stars++;
 
-    if (stars >= 100)
+    if (stars >= 35)
     {
-      // TODO Victory screen
+      isFinished = true;
+      victoryScreen.SetActive(true);
     }
 
     if (stars > maxStarsLevel)
@@ -40,9 +50,20 @@ public class StarManager : MonoBehaviour
 
   public void CustomerHate(int value)
   {
+    if (isFinished)
+    {
+      return;
+    }
+    
     stars = Mathf.Max(0, stars - value);
     AudioManager.instance.PlayLostStarAudio();
     UpdateUI();
+
+    if (stars <= 0)
+    {
+      isFinished = true;
+      defeatScreen.SetActive(true);
+    }
   }
 
   private void UpdateUI()

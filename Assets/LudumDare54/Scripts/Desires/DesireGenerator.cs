@@ -46,7 +46,7 @@ public class DesireGenerator
       return 3;
     }
 
-    return 2;
+    return Random.value > 0.5f ? 2 : 1;
   }
 
   private Desire createDesire()
@@ -67,7 +67,7 @@ public class DesireGenerator
     }
     else
     {
-      var satisfactionLevel = Random.value > 0.3f ? 1 : -1;
+      var satisfactionLevel = Random.value > 0.25f ? 1 : -1;
       return new RaceDesire(race, satisfactionLevel);
     }
   }
