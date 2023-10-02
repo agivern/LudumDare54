@@ -16,10 +16,20 @@ public class DesireGenerator
       var des = new RaceDesire(race, 1);
       desires.Add(des);
 
-      var probaHate = Random.Range(0, 100);
+      var randomHate = Random.Range(0, 100);
 
       var race2 = race;
-      if (probaHate < 60)
+      var probaHate = 60;
+      if (AlienSpawner.instance.SpawnableRaces().Count == 3)
+      {
+        probaHate = 65;
+      }
+      else if (AlienSpawner.instance.SpawnableRaces().Count == 4)
+      {
+        probaHate = 70;
+      }
+
+      if (randomHate < probaHate)
       {
         do
         {
@@ -29,16 +39,20 @@ public class DesireGenerator
         desires.Add(new RaceDesire(race2, -1));
       }
 
-      // if (AlienSpawner.instance.SpawnableRaces().Count == 4)
-      // {
-      //   var race3 = race;
-      //   do
-      //   {
-      //     race3 = possibleRaces[Random.Range(0, possibleRaces.Count)];
+      if (AlienSpawner.instance.SpawnableRaces().Count == 4)
+      {
+        var randomMoreLike = Random.Range(0, 100);
+        if (randomMoreLike > 75)
+        {
+          var race3 = race;
+          do
+          {
+            race3 = possibleRaces[Random.Range(0, possibleRaces.Count)];
 
-      //   } while (race3 == race || race3 == race2);
-      //   desires.Add(new RaceDesire(race3, 1));
-      // }
+          } while (race3 == race || race3 == race2);
+          desires.Add(new RaceDesire(race3, 1));
+        }
+      }
     }
 
     if (AlienSpawner.instance.SpawnableRaces().Count == 1)
