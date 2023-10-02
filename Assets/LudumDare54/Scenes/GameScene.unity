@@ -1330,8 +1330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a89de8e8d194da9b2e68f5351621b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnRate: 4
-  randomAmount: 0.2
+  baseSpawnRate: 5
+  randomAmount: 0.35
   spawnPoint: {fileID: 739306561}
   alienRaceByStars:
   - race: 0
@@ -1344,7 +1344,7 @@ MonoBehaviour:
     starsRequired: 13
     alienPrefab: {fileID: 221768749944938432, guid: 83df75c13f0549949b58493f4299b80b, type: 3}
   - race: 3
-    starsRequired: 18
+    starsRequired: 20
     alienPrefab: {fileID: 7073253886411188140, guid: c209bd249aee6f145a79ebf883134ad1, type: 3}
   pause: 1
 --- !u!4 &777880104
@@ -8370,7 +8370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3210544701319226614, guid: 6bcef37add4ad4715a5af7cd8f962ec3, type: 3}
       propertyPath: tutorialText.Array.data[1]
-      value: I need 35 stars to be the best hotel of the galaxy.
+      value: I need 30 stars to be the best hotel of the galaxy.
       objectReference: {fileID: 0}
     - target: {fileID: 3210544701319226614, guid: 6bcef37add4ad4715a5af7cd8f962ec3, type: 3}
       propertyPath: tutorialText.Array.data[2]

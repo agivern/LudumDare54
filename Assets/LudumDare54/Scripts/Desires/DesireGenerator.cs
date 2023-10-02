@@ -38,12 +38,12 @@ public class DesireGenerator
   {
     if (StarManager.instance.MaxStarsLevel > 25f)
     {
-      return 4;
+      return Random.value > 0.35f ? 3 : 2;
     }
 
     if (StarManager.instance.MaxStarsLevel > 15f)
     {
-      return 3;
+      return 2;
     }
 
     return Random.value > 0.5f ? 2 : 1;
@@ -62,7 +62,7 @@ public class DesireGenerator
 
     if (AlienSpawner.instance.SpawnableRaces().Count > 1)
     {
-      var satisfactionLevel = Random.value > 0.75f ? 1 : -1;
+      var satisfactionLevel = Random.value > 0.6f ? 1 : -1;
       return new RaceDesire(race, satisfactionLevel);
     }
     else
