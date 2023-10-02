@@ -26,7 +26,7 @@ public class AlienDragDrop : MonoBehaviour
       Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       if (GetComponent<Collider2D>().OverlapPoint(mousePos))
       {
-        if (CurrentlyDragging == null && (alien.room != null || LineManager.instance.GetNextCustomer() == alien))
+        if (CurrentlyDragging == null && (alien.room != null || LineManager.instance.GetNextCustomer() == alien) && alien.exiting == false)
         {
           _isDragging = true;
           CurrentlyDragging = this;
@@ -58,11 +58,11 @@ public class AlienDragDrop : MonoBehaviour
         var room = hit.collider.gameObject.GetComponent<Room>();
         alien.MoveToRoom(room);
       }
-      else if (hit.collider != null && hit.collider.gameObject.CompareTag("Lobby"))
-      {
-        alien.MoveToLobby();
+      // else if (hit.collider != null && hit.collider.gameObject.CompareTag("Lobby"))
+      // {
+      //   alien.MoveToLobby();
 
-      }
+      // }
       else
       {
         //Alien is in space

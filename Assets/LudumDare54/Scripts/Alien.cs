@@ -19,7 +19,7 @@ public class Alien : MonoBehaviour
   private float roomStayDuration;
   private float happiness = 0;
   private List<Desire> desires = new List<Desire>();
-  private bool exiting = false;
+  public bool exiting = false;
 
   public AlienAnimator animator;
 
@@ -127,7 +127,7 @@ public class Alien : MonoBehaviour
     {
       return;
     }
-    
+
     exiting = true;
     var pay = 5 + Mathf.Max(0, 50 + (Mathf.RoundToInt(happiness) * 3));
     MoneyManager.instance.CustomerPay(pay);
