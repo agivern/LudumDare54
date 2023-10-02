@@ -8616,7 +8616,7 @@ PrefabInstance:
       objectReference: {fileID: 84725743}
     - target: {fileID: 7706191412185516159, guid: 994769fd8f00d4424bd0f3ea9558210a, type: 3}
       propertyPath: jokeText.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7706191412185516159, guid: 994769fd8f00d4424bd0f3ea9558210a, type: 3}
       propertyPath: jokeText.Array.data[0]
@@ -8628,7 +8628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7706191412185516159, guid: 994769fd8f00d4424bd0f3ea9558210a, type: 3}
       propertyPath: jokeText.Array.data[2]
-      value: If your room feels cold, it might just be the void of space.
+      value: Did you hear the noise in the room 101 ?
       objectReference: {fileID: 0}
     - target: {fileID: 8201047744840866828, guid: 994769fd8f00d4424bd0f3ea9558210a, type: 3}
       propertyPath: m_Name

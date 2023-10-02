@@ -26,6 +26,7 @@ public class TutorialManager : MonoBehaviour
       {
         AlienSpawner.instance.pause = false;
         dialogBox.SetActive(false);
+        this.enabled = false;
       }
       else
       {
