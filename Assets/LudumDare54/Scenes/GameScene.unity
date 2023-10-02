@@ -8208,7 +8208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9724ca418d0fdd342892879ba7d1d4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 0}
+  ship: {fileID: 7781952924646530562, guid: 6208d347c6fcd0a4f9888517d3cb863b, type: 3}
   shipSpawn: {fileID: 748071183}
   shipParking: {fileID: 989888003}
 --- !u!1 &2115329960
