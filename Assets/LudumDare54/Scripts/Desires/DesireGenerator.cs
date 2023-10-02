@@ -17,15 +17,26 @@ public class DesireGenerator
       desires.Add(des);
 
       var probaHate = Random.Range(0, 100);
+      var race2 = race;
       if (probaHate < 70)
       {
-        var race2 = race;
         do
         {
           race2 = possibleRaces[Random.Range(0, possibleRaces.Count)];
 
         } while (race2 == race);
         desires.Add(new RaceDesire(race2, -1));
+      }
+
+      if (AlienSpawner.instance.SpawnableRaces().Count == 4)
+      {
+        var race3 = race;
+        do
+        {
+          race3 = possibleRaces[Random.Range(0, possibleRaces.Count)];
+
+        } while (race3 == race || race3 == race2);
+        desires.Add(new RaceDesire(race3, 1));
       }
     }
 

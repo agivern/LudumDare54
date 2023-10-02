@@ -7,27 +7,44 @@ using UnityEngine.UI;
 public class Room : MonoBehaviour
 {
   [SerializeField] List<Alien> aliens = new List<Alien>();
-  [SerializeField] List<RoomObjectType> roomObjects = new List<RoomObjectType>();
-  [SerializeField] List<Button> shopButtons;
   [SerializeField] int maxObject;
+  [SerializeField] List<GameObject> backgrounds;
+  [SerializeField] List<GameObject> objects;
 
-
+  private int roomStars = 0;
   public float roomWidth = 6f;
+  private List<RoomObjectType> roomObjects = new List<RoomObjectType>();
 
-  public void AddRoomObject(RoomObjectType roomObjectType)
+  void Update()
   {
-    if (roomObjects.Contains(roomObjectType) == false)
+    if (roomStars < StarManager.instance.MaxStarsLevel)
     {
-      roomObjects.Add(roomObjectType);
 
-      if (roomObjects.Count >= maxObject)
-      {
-        shopButtons.ForEach(shopButton => shopButton.interactable = false);
-      }
+
     }
-    else
+  }
+
+  private void UpgradeRoomStars()
+  {
+    roomStars++;
+    if (roomStars == 10)
     {
-      Debug.LogError("Room object already in the room");
+      backgrounds[0].SetActive(false);
+      backgrounds[1].SetActive(true);
+    }
+    else if (roomStars == 15)
+    {
+      backgrounds[1].SetActive(false);
+      backgrounds[2].SetActive(true);
+    }
+    else if (roomStars == 20)
+    {
+      backgrounds[2].SetActive(false);
+      backgrounds[3].SetActive(true);
+    }
+    else if (roomStars == 25)
+    {
+
     }
   }
 
