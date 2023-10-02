@@ -15,12 +15,16 @@ public class Room : MonoBehaviour
   public float roomWidth = 6f;
   private List<RoomObjectType> roomObjects = new List<RoomObjectType>();
 
+  void Start()
+  {
+    backgrounds[0].SetActive(true);
+  }
+
   void Update()
   {
-    if (roomStars < StarManager.instance.MaxStarsLevel)
+    while (roomStars < StarManager.instance.MaxStarsLevel)
     {
-
-
+      UpgradeRoomStars();
     }
   }
 
@@ -32,15 +36,13 @@ public class Room : MonoBehaviour
       backgrounds[0].SetActive(false);
       backgrounds[1].SetActive(true);
     }
-    else if (roomStars == 15)
+    else if (roomStars == 20)
     {
       backgrounds[1].SetActive(false);
       backgrounds[2].SetActive(true);
     }
     else if (roomStars == 20)
     {
-      backgrounds[2].SetActive(false);
-      backgrounds[3].SetActive(true);
     }
     else if (roomStars == 25)
     {
