@@ -15,20 +15,34 @@ public class DesireGenerator
       var race = possibleRaces[Random.Range(0, possibleRaces.Count)];
       var des = new RaceDesire(race, 1);
       desires.Add(des);
-    }
 
-    for (var i = 0; i < numberOfDesires; i++)
-    {
-      var desire = createDesire();
-      // Fix me ugly
-      if (desires.Any(d => d.Equals(desire)))
+      var probaHate = Random.Range(0, 100);
+      if (probaHate < 70)
       {
-        continue;
-      }
+        var race2 = race;
+        do
+        {
+          race2 = possibleRaces[Random.Range(0, possibleRaces.Count)];
 
-      desires.Add(desire);
+        } while (race2 == race);
+        desires.Add(new RaceDesire(race2, -1));
+      }
     }
 
+    if (AlienSpawner.instance.SpawnableRaces().Count == 1)
+    {
+      for (var i = 0; i < numberOfDesires; i++)
+      {
+        var desire = createDesire();
+        // Fix me ugly
+        if (desires.Any(d => d.Equals(desire)))
+        {
+          continue;
+        }
+
+        desires.Add(desire);
+      }
+    }
     desires.Add(new LineDesire(10f, -1f));
 
     return desires;
@@ -36,6 +50,7 @@ public class DesireGenerator
 
   private int numberOfDesires()
   {
+    return 1;
     if (StarManager.instance.MaxStarsLevel > 25f)
     {
       return Random.value > 0.35f ? 3 : 2;
