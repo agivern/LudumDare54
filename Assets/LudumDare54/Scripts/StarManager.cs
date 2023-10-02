@@ -28,6 +28,7 @@ public class StarManager : MonoBehaviour
     }
     stars++;
 
+    starsUI.text = stars.ToString();
     if (stars >= 30)
     {
       isFinished = true;
@@ -50,6 +51,7 @@ public class StarManager : MonoBehaviour
     }
 
     stars = Mathf.Max(0, stars - value);
+    starsUI.text = stars.ToString();
     AudioManager.instance.PlayLostStarAudio();
 
     if (stars <= 0)
