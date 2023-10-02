@@ -57,6 +57,7 @@ MonoBehaviour:
   likeBox: {fileID: 6439231217294333346}
   race: 0
   timerImage: {fileID: 9191573738064711859}
+  exiting: 0
   animator: {fileID: 4830255042788797135}
 --- !u!61 &2695684291086636389
 BoxCollider2D:
@@ -90,7 +91,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011093944, y: 0.3816969}
+  m_Offset: {x: -0.04032889, y: 0.3816969}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -101,7 +102,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3109393, y: 0.6633939}
+  m_Size: {x: 0.5069854, y: 0.6633939}
   m_EdgeRadius: 0
 --- !u!114 &2816282980070700506
 MonoBehaviour:
