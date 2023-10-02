@@ -128,6 +128,8 @@ public class Alien : MonoBehaviour
       return;
     }
 
+    this.GetComponent<AlienDragDrop>().enabled = false;
+
     exiting = true;
     var pay = 5 + Mathf.Max(0, 50 + (Mathf.RoundToInt(happiness) * 3));
     MoneyManager.instance.CustomerPay(pay);
@@ -228,7 +230,19 @@ public class Alien : MonoBehaviour
     rb.constraints = RigidbodyConstraints2D.None;
     rb.angularVelocity = Random.Range(-300f, 300f);
 
-    StarManager.instance.CustomerHate(3);
+    if (StarManager.instance.MaxStarsLevel > 15)
+    {
+      StarManager.instance.CustomerHate(3);
+    }
+    else if (StarManager.instance.MaxStarsLevel > 10)
+    {
+      StarManager.instance.CustomerHate(2);
+    }
+    else
+    {
+      StarManager.instance.CustomerHate(1);
+    }
+
     Destroy(this.gameObject, 3f);
   }
 }
