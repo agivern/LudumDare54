@@ -14,6 +14,10 @@ public class AlienSpawner : MonoBehaviour
 
   public Transform spawnPoint;
 
+  public GameObject ship;
+  public Vector2 shipSpawn;
+  public Vector2 shipParking;
+
   private float nextSpawnTime = 0f;
 
   public AlienRaceByStars[] alienRaceByStars;
@@ -52,9 +56,19 @@ public class AlienSpawner : MonoBehaviour
 
   public void SpawnAlien()
   {
+    // spawn ship
+    // Instantiate(ship, shipSpawn);
+
+    // wait for ship animation (sync with ship time)
+    Invoke("isntanciateAlien", 2f);
+ }
+
+  private void isntanciateAlien() {
+    
     var alienPrefab = RandomSpawnableAliens();
     var alienObj = Instantiate(alienPrefab, spawnPoint.position, Quaternion.identity);
     LineManager.instance.AddAlien(alienObj.GetComponent<Alien>());
+ 
   }
 
   public List<AlienRace> SpawnableRaces()

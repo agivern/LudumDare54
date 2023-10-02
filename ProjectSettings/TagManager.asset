@@ -8,6 +8,7 @@ TagManager:
   - Lobby
   - exit_warp
   - exit
+  - parked
   layers:
   - Default
   - TransparentFX
