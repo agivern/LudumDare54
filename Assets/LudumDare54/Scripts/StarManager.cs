@@ -32,7 +32,7 @@ public class StarManager : MonoBehaviour
     }
     stars++;
 
-    if (stars >= 35)
+    if (stars >= 30)
     {
       isFinished = true;
       victoryScreen.SetActive(true);
