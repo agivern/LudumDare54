@@ -38,7 +38,7 @@ public class DesireGenerator
       if (AlienSpawner.instance.SpawnableRaces().Count == 4)
       {
         var randomMoreLike = Random.Range(0, 100);
-        if (randomMoreLike > 50)
+        if (randomMoreLike > 60)
         {
           var race3 = race;
           do
