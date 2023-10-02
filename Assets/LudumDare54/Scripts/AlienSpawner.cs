@@ -15,8 +15,8 @@ public class AlienSpawner : MonoBehaviour
   public Transform spawnPoint;
 
   public GameObject ship;
-  public Vector2 shipSpawn;
-  public Vector2 shipParking;
+  public Transform shipSpawn;
+  public Transform shipParking;
 
   private float nextSpawnTime = 0f;
 
@@ -57,10 +57,17 @@ public class AlienSpawner : MonoBehaviour
   public void SpawnAlien()
   {
     // spawn ship
-    // Instantiate(ship, shipSpawn);
+
+    float time = 2f;
+    GameObject newShip = Instantiate(ship);
+    newShip.transform.position = shipSpawn.position;
+    SpaceShip ss = newShip.GetComponent<SpaceShip>();
+    ss.spawn = shipSpawn;
+    ss.parking = shipParking;
+    ss.time = time;
 
     // wait for ship animation (sync with ship time)
-    Invoke("isntanciateAlien", 2f);
+    Invoke("isntanciateAlien", time);
  }
 
   private void isntanciateAlien() {

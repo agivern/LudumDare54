@@ -6,8 +6,8 @@ public class SpaceShip : MonoBehaviour
 {     
     public float time = 2f;
     private float startTime;
-    public Transform oriPos;
-    public Transform destination;
+    public Transform spawn;
+    public Transform parking;
 
     public void Start() {
 
@@ -18,14 +18,15 @@ public class SpaceShip : MonoBehaviour
     private void Update()
     {
     
-        transform.position = Vector3.Lerp(oriPos.position, destination.position, (Time.time - startTime) / time);
+        transform.position = 
+        Vector3.Lerp(spawn.position, parking.position, (Time.time - startTime) / time);
     
-        if(transform.position.x >= destination.position.x) {
+        if(transform.position.x >= parking.position.x) {
             SpawnAndDestroy();
         }
     }
 
     private void SpawnAndDestroy() {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
